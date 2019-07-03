@@ -1,0 +1,14 @@
+0:0:0:0:0:0:0:1 - - [17/Dec/2018:16:41:11 +0800] "GET / HTTP/1.1" 302 - http-bio-8081-exec-1 132
+0:0:0:0:0:0:0:1 - - [17/Dec/2018:16:41:11 +0800] "GET /login.html;jsessionid=88EFF0355651C6BD919FD5B183740208 HTTP/1.1" 200 12691 http-bio-8081-exec-7 23
+0:0:0:0:0:0:0:1 - - [17/Dec/2018:16:41:11 +0800] "GET /assets//css/fonts.googleapis.com.css HTTP/1.1" 200 506 http-bio-8081-exec-3 26
+0:0:0:0:0:0:0:1 - - [17/Dec/2018:16:41:11 +0800] "GET /assets//css/ace-rtl.min.css HTTP/1.1" 200 116806 http-bio-8081-exec-5 26
+0:0:0:0:0:0:0:1 - - [17/Dec/2018:16:41:11 +0800] "GET /assets//font-awesome/4.5.0/css/font-awesome.min.css HTTP/1.1" 200 27470 http-bio-8081-exec-2 60
+0:0:0:0:0:0:0:1 - - [17/Dec/2018:16:41:11 +0800] "GET /assets//js/jquery-2.1.4.min.js HTTP/1.1" 200 84384 http-bio-8081-exec-6 84
+0:0:0:0:0:0:0:1 - - [17/Dec/2018:16:41:11 +0800] "GET /assets//css/bootstrap.min.css HTTP/1.1" 200 139440 http-bio-8081-exec-8 155
+0:0:0:0:0:0:0:1 - - [17/Dec/2018:16:41:11 +0800] "GET /assets/js/jquery.cookie.js HTTP/1.1" 200 3121 http-bio-8081-exec-9 67
+0:0:0:0:0:0:0:1 - - [17/Dec/2018:16:41:11 +0800] "GET /assets//css/ace.min.css HTTP/1.1" 200 468700 http-bio-8081-exec-4 239
+0:0:0:0:0:0:0:1 - - [17/Dec/2018:16:41:12 +0800] "GET /assets//css/images/pattern.jpg HTTP/1.1" 200 7080 http-bio-8081-exec-4 50
+0:0:0:0:0:0:0:1 - - [17/Dec/2018:16:41:12 +0800] "GET /assets//font-awesome/4.5.0/fonts/fontawesome-webfont.woff2?v=4.5.0 HTTP/1.1" 200 66624 http-bio-8081-exec-8 61
+0:0:0:0:0:0:0:1 - - [17/Dec/2018:16:41:12 +0800] "GET /favicon.ico HTTP/1.1" 302 - http-bio-8081-exec-8 1
+0:0:0:0:0:0:0:1 - - [17/Dec/2018:16:41:12 +0800] "GET /login.html HTTP/1.1" 200 12691 http-bio-8081-exec-8 3
+0:0:0:0:0:0:0:1 - - [17/Dec/2018:16:41:21 +0800] "POST /user/login.do HTTP/1.1" 500 6614 http-bio-8081-exec-8 429

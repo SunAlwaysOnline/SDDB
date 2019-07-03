@@ -1,0 +1,15 @@
+0:0:0:0:0:0:0:1 - - [02/Apr/2019:00:20:12 +0800] "POST /score/getClassroom.do HTTP/1.1" 302 - http-bio-8081-exec-7 1
+0:0:0:0:0:0:0:1 - - [02/Apr/2019:00:20:14 +0800] "GET /views/bigDataAnalysis/postGraduate.html HTTP/1.1" 302 - http-bio-8081-exec-7 2
+0:0:0:0:0:0:0:1 - - [02/Apr/2019:00:20:14 +0800] "GET /login.html HTTP/1.1" 304 - http-bio-8081-exec-7 46
+0:0:0:0:0:0:0:1 - - [02/Apr/2019:00:20:15 +0800] "POST /user/login.do HTTP/1.1" 200 46 http-bio-8081-exec-7 11
+0:0:0:0:0:0:0:1 - - [02/Apr/2019:00:20:16 +0800] "POST /leaveMessage/getMessage HTTP/1.1" 200 603 http-bio-8081-exec-7 9
+0:0:0:0:0:0:0:1 - - [02/Apr/2019:00:20:16 +0800] "POST /notice/findSome.do HTTP/1.1" 200 37023 http-bio-8081-exec-7 7
+0:0:0:0:0:0:0:1 - - [02/Apr/2019:00:20:17 +0800] "GET /views/bigDataAnalysis/postGraduate.html HTTP/1.1" 200 54834 http-bio-8081-exec-7 2
+0:0:0:0:0:0:0:1 - - [02/Apr/2019:00:20:18 +0800] "POST /score/getClassroom.do HTTP/1.1" 200 18659 http-bio-8081-exec-7 5
+0:0:0:0:0:0:0:1 - - [02/Apr/2019:00:20:23 +0800] "POST /student/findStuByClass.do HTTP/1.1" 200 4229 http-bio-8081-exec-7 5
+0:0:0:0:0:0:0:1 - - [02/Apr/2019:00:25:13 +0800] "POST /dorm/findDistinctDorm HTTP/1.1" 200 9969 http-bio-8081-exec-4 8
+0:0:0:0:0:0:0:1 - - [02/Apr/2019:00:25:17 +0800] "POST /dorm/getDormMemberScore HTTP/1.1" 200 1308 http-bio-8081-exec-6 85
+0:0:0:0:0:0:0:1 - - [02/Apr/2019:00:25:24 +0800] "POST /dorm/getDormRank HTTP/1.1" 200 106 http-bio-8081-exec-4 6737
+0:0:0:0:0:0:0:1 - - [02/Apr/2019:00:26:01 +0800] "POST /score/getClassroom.do HTTP/1.1" 200 18659 http-bio-8081-exec-4 38
+0:0:0:0:0:0:0:1 - - [02/Apr/2019:00:26:05 +0800] "POST /classroom/getClassMemberScore HTTP/1.1" 200 5080 http-bio-8081-exec-6 150
+0:0:0:0:0:0:0:1 - - [02/Apr/2019:00:26:12 +0800] "POST /classroom/getClassroomRank HTTP/1.1" 200 96 http-bio-8081-exec-4 6858

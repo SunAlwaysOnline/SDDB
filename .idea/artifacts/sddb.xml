@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="sddb">
+    <output-path>$PROJECT_DIR$/out/artifacts/sddb</output-path>
+    <root id="archive" name="sddb.war">
+      <element id="dir-copy" path="$PROJECT_DIR$/src/main/webapp" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="SDDB4.0" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
