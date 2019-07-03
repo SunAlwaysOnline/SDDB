@@ -19,7 +19,7 @@
   <img src="https://github.com/SunAlwaysOnline/SDDB/blob/master/screenShot/个人主页.png"/>
 </div>
 
-### 新闻页面与成绩查询
+### 发展综合分析
 <br>
 <div align="center">
   <img src="https://github.com/SunAlwaysOnline/SDDB/blob/master/screenShot/数据分析模块-发展分析1.png"/>
@@ -33,6 +33,5 @@
 <br>
 
 ### <a href="https://github.com/SunAlwaysOnline/SDDB/tree/master/screenShot">更多截图</a>
-
 
 ### <a href="https://blog.csdn.net/qq_33591903">欢迎关注个人博客</a>
