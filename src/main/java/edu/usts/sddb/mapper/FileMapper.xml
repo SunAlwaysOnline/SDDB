@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 此配置文件解决t_file表的基本增删改查 是AdviceDao的逻辑表现 -->
+
+
+<!-- 依据建议种类与种类等级来查找数据，每次随机取出一条记录 -->
+<mapper namespace="edu.usts.sddb.dao.FileDao">
+    <insert id="insertFile" parameterType="edu.usts.sddb.entity.SDDBFile">
+        insert into t_file
+        (fi_user_id,fi_original_name,
+        fi_modified_name,fi_path,
+        fi_info,fi_major,
+        fi_grade,fi_course,fi_is_checked)
+        values
+        (#{fi_user_id},#{fi_original_name},
+        #{fi_modified_name},#{fi_path},
+        #{fi_info},#{fi_major},
+        #{fi_grade},#{fi_course},#{fi_is_checked})
+    </insert>
+
+    <select id="findCountBySelect" parameterType="edu.usts.sddb.entity.SDDBFile" resultType="int">
+        select count(*) from t_file where fi_grade = #{fi_grade}
+        <if test="fi_major!=null">
+            and fi_major = #{fi_major}
+        </if>
+        <if test="fi_course!=null">
+            and fi_course = #{fi_course}
+        </if>
+
+    </select>
+
+    <select id="distinctGrade" resultType="string" parameterType="edu.usts.sddb.entity.SDDBFile">
+        select distinct fi_grade from t_file
+    </select>
+
+    <select id="distinctMajor" resultType="string" parameterType="edu.usts.sddb.entity.SDDBFile">
+        select distinct fi_major from t_file where fi_grade = #{fi_grade}
+    </select>
+
+    <select id="distinctCourse" resultType="string" parameterType="edu.usts.sddb.entity.SDDBFile">
+        select distinct fi_course from t_file where fi_grade = #{fi_grade} and fi_major = #{fi_major}
+    </select>
+
+
+    <select id="findFileById" parameterType="int" resultType="edu.usts.sddb.entity.SDDBFile">
+        select * from t_file where fi_id = #{fi_id}
+    </select>
+
+    <select id="findFile" parameterType="edu.usts.sddb.entity.SDDBFile" resultType="edu.usts.sddb.entity.SDDBFile">
+        select * from t_file where fi_grade = #{fi_grade}
+        and fi_major = #{fi_major}
+        and fi_course = #{fi_course}
+        order by fi_download_count desc
+    </select>
+
+    <!--查询某用户上传的资料数-->
+    <select id="findCountByUserId" parameterType="String" resultType="int">
+        select count(*) from t_file
+        where fi_user_id=#{fi_user_id}
+    </select>
+
+
+    <update id="editDownloadCount" parameterType="int">
+        update t_file set fi_download_count = fi_download_count + 1 where fi_id = #{fi_id}
+    </update>
+
+</mapper>

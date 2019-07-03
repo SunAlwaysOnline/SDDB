@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 此配置文件解决advice表的基本增删改查 是AdviceDao的逻辑表现 -->
+
+
+<!-- 依据建议种类与种类等级来查找数据，每次随机取出一条记录 -->
+<mapper namespace="edu.usts.sddb.dao.AdviceDao">
+    <select id="findAdvice" resultType="edu.usts.sddb.entity.Advice">
+		select * from t_advice where ad_category =#{0} and ad_level=#{1} order by rand() limit 1 
+	</select>
+
+    <select id="findAllAdvice" resultType="edu.usts.sddb.entity.Advice">
+		select * from t_advice order by ad_id asc
+	</select>
+
+    <select id="findAdvicesByPage" resultType="edu.usts.sddb.entity.Advice">
+		select * from
+		t_advice
+		order by ad_id asc
+		limit #{0},#{1}
+	</select>
+
+    <select id="findComment" resultType="edu.usts.sddb.entity.assist.DBComment">
+		show full fields from t_advice
+	</select>
+
+    <select id="getAdviceSum" resultType="int">
+		select count(*) from
+		t_advice
+	</select>
+
+    <select id="findByFiltersSum" resultType="int" parameterType="string">
+		${_parameter}
+	</select>
+
+    <select id="findByFilters" parameterType="string" resultType="edu.usts.sddb.entity.Advice">
+		${_parameter}
+	</select>
+
+    <insert id="add" parameterType="edu.usts.sddb.entity.Advice">
+		insert into t_advice(ad_category,ad_level,ad_suggestion)
+		values (#{ad_category},#{ad_level},#{ad_suggestion})
+	</insert>
+
+    <delete id="del" parameterType="string">
+		delete from t_advice where ad_id = #{ad_id}
+	</delete>
+
+
+    <update id="edit" parameterType="edu.usts.sddb.entity.Advice">
+		update t_advice set
+		ad_category=#{ad_category},ad_level=#{ad_level},ad_suggestion=#{ad_suggestion}
+		where
+		ad_id=#{ad_id}
+	</update>
+</mapper>

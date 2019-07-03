@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 此配置文件解决t_student表的基本增删改查 -->
+<mapper namespace="edu.usts.sddb.dao.StudentDao">
+
+    <select id="findAll" resultType="edu.usts.sddb.entity.Student">
+		select * from t_student order by st_id desc
+	</select>
+
+    <!-- 第一个参数为页数，第二个参数为每页多少行 -->
+    <select id="findByPage" resultType="edu.usts.sddb.entity.Student">
+		select * from
+		t_student
+		order by st_id desc
+		limit #{0},#{1}
+	</select>
+
+    <select id="getSum" resultType="int">
+		select count(*) from
+		t_student
+	</select>
+
+    <!-- 按照filter的复杂条件查找 -->
+    <select id="findByFilters" parameterType="string"
+            resultType="edu.usts.sddb.entity.Student">
+		${_parameter}
+	</select>
+
+    <!-- 按照filter的复杂条件查找 -->
+    <select id="findByFiltersSum" parameterType="string"
+            resultType="int">
+		${_parameter}
+	</select>
+
+
+    <select id="findById" parameterType="string"
+            resultType="edu.usts.sddb.entity.Student">
+		select * from t_student where st_id=#{id}
+	</select>
+
+    <select id="findStudentsByClassroom" parameterType="string"
+            resultType="edu.usts.sddb.entity.Student">
+		select st_id,st_name,st_sex from t_student where st_class
+		=#{st_class}
+	</select>
+
+
+    <!-- 通过专业名称查找学生列表 -->
+    <select id="findStuIdByMajorAndYear" resultType="string">
+		select st_id
+		from t_student where st_major=#{0} and st_grade=#{1}
+	</select>
+
+    <!-- 最基本的增加、修改、删除在下面完成 -->
+
+    <!-- 增加一条学生数据 -->
+    <insert id="add" parameterType="edu.usts.sddb.entity.Student">
+		replace into t_student(st_id,st_name,st_sex,st_major,st_class,st_grade)
+		values(#{st_id},#{st_name},#{st_sex},#{st_major},#{st_class},#{st_grade});
+	</insert>
+
+    <!-- 按学号删除学生 -->
+    <delete id="del" parameterType="string">
+		delete from t_student
+		where st_id=#{st_id}
+	</delete>
+
+    <update id="edit" parameterType="edu.usts.sddb.entity.Student">
+		update t_student set
+		st_name=#{st_name},st_sex=#{st_sex},st_major=#{st_major},
+		st_class=#{st_class},st_grade=#{st_grade}
+		where
+		st_id=#{st_id}
+	</update>
+
+    <!--返回表中注释-->
+    <select id="findComment" resultType="edu.usts.sddb.entity.assist.DBComment">
+		show full fields from t_student
+	</select>
+</mapper>

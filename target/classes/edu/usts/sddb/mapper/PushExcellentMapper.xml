@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 此配置文件解决t_push_excellent表的基本增删改查  -->
+<mapper namespace="edu.usts.sddb.dao.PushExcellentDao">
+
+    <select id="findAll" resultType="edu.usts.sddb.entity.Student">
+		select * from t_push_excellent order by pu_id desc
+	</select>
+
+    <select id="findByName" parameterType="string" resultType="edu.usts.sddb.entity.PushExcellent">
+		select * from t_push_excellent where pu_student_name =#{pu_student_name}
+	</select>
+
+    <select id="findByPage" resultType="edu.usts.sddb.entity.PushExcellent">
+		select * from
+		t_push_excellent
+		order by pu_id desc
+		limit #{0},#{1}
+	</select>
+
+    <select id="getSum" resultType="int">
+		select count(*) from
+		t_push_excellent
+	</select>
+
+    <select id="findByFiltersSum" resultType="int" parameterType="string">
+		${_parameter}
+	</select>
+
+    <select id="findByFilters" parameterType="string" resultType="edu.usts.sddb.entity.PushExcellent">
+		${_parameter}
+	</select>
+
+    <insert id="add" parameterType="edu.usts.sddb.entity.PushExcellent">
+		replace into t_push_excellent(pu_student_id,pu_student_name,pu_class_name,pu_time,pu_hold_duty,pu_scholarship,pu_is_fail_exam)
+		values (#{pu_student_id},#{pu_student_name},#{pu_class_name},#{pu_time},#{pu_hold_duty},#{pu_scholarship},#{pu_is_fail_exam})
+	</insert>
+
+    <delete id="del" parameterType="string">
+		delete from t_push_excellent where pu_id = #{pu_id}
+	</delete>
+
+
+    <update id="edit" parameterType="edu.usts.sddb.entity.PushExcellent">
+		update t_push_excellent set
+		pu_student_id=#{pu_student_id},pu_student_name=#{pu_student_name},
+		pu_class_name=#{pu_class_name},pu_time=#{pu_time},pu_hold_duty=#{pu_hold_duty},
+		pu_scholarship=#{pu_scholarship},pu_is_fail_exam=#{pu_is_fail_exam}
+		where
+		pu_id=#{pu_id}
+	</update>
+
+
+    <!--返回表中注释-->
+    <select id="findComment" resultType="edu.usts.sddb.entity.assist.DBComment">
+		show full fields from t_push_excellent
+	</select>
+</mapper>

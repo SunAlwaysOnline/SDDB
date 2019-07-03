@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 此配置文件解决volunteer表的基本增删改查 是VolunteerDao的逻辑表现 -->
+
+
+<mapper namespace="edu.usts.sddb.dao.VolunteerDao">
+
+    <select id="findAll" resultType="edu.usts.sddb.entity.Volunteer">
+		select * from t_volunteer order by v_student_id asc
+	</select>
+
+    <!--获取总数-->
+    <select id="getVolunteerSum" resultType="int">
+		select count(*) from t_volunteer
+	</select>
+
+    <!--分页显示-->
+    <select id="findVolunteerByPage" resultType="edu.usts.sddb.entity.Volunteer">
+		select * from t_volunteer order by v_student_id desc limit #{0},#{1}
+	</select>
+
+    <!--按条件进行查找,返回总条数,语句较为复杂-->
+    <select id="findByFiltersSum" resultType="int" parameterType="String">
+		${_parameter}
+	</select>
+
+    <!--按条件进行查找,返回总记录数,语句较为复杂-->
+    <select id="findByFilters" parameterType="String" resultType="edu.usts.sddb.entity.Volunteer">
+		${_parameter}
+	</select>
+
+    <!--返回表中注释-->
+    <select id="findComment" resultType="edu.usts.sddb.entity.assist.DBComment">
+		show full fields from t_volunteer
+	</select>
+
+    <!--根据学号查找时长-->
+    <select id="findTimeById" parameterType="String" resultType="Double">
+		 select v_time from t_volunteer where v_student_id=#{id}
+	</select>
+
+
+    <!--获得此学号所在班级的状况-->
+    <select id="getClassRank" parameterType="String" resultType="edu.usts.sddb.entity.Volunteer">
+        select * from t_volunteer v
+          where v_student_id in
+            (select st_id from t_student where st_class in
+              (select st_class from t_student where st_id=#{id}
+              )
+            )
+          order by v_time desc
+    </select>
+
+    <!--获得此学号所在年级的状况-->
+    <select id="getGradeRank" parameterType="String" resultType="edu.usts.sddb.entity.Volunteer">
+        select * from t_volunteer v
+          where v_student_id in
+            (select st_id from t_student where st_grade in
+              (select st_grade from t_student where st_id=#{id}
+              )
+            )
+          order by v_time desc
+    </select>
+
+    <!--获得此学号所在学院的状况-->
+    <select id="getAcademyRank" parameterType="String" resultType="edu.usts.sddb.entity.Volunteer">
+       select * from t_volunteer order by v_time desc
+    </select>
+
+    <!--新增，遇到主键重复，则更新，否则正常插入-->
+    <insert id="add" parameterType="edu.usts.sddb.entity.Volunteer">
+        replace into t_volunteer values (#{v_student_id},#{v_student_name},#{v_time});
+    </insert>
+
+    <delete id="del" parameterType="String">
+        delete from t_volunteer where v_student_id=#{v_student_id};
+    </delete>
+
+    <update id="edit" parameterType="edu.usts.sddb.entity.Volunteer">
+        update t_volunteer set v_student_name=#{v_student_name},v_time=#{v_time}
+        where v_student_id=#{v_student_id};
+    </update>
+
+
+</mapper>

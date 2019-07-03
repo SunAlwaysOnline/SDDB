@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 此配置文件解决t_leave_message表的基本增删改查 是LeaveMessageDao的逻辑表现 -->
+
+
+<!-- 依据建议种类与种类等级来查找数据，每次随机取出一条记录 -->
+<mapper namespace="edu.usts.sddb.dao.LeaveMessageDao">
+
+    <insert id="add" parameterType="edu.usts.sddb.entity.LeaveMessage">
+		insert into t_leave_message(le_author_id,le_content,le_target_id)
+		values (#{le_author_id},#{le_content},#{le_target_id})
+	</insert>
+
+    <!--获取一些有关此id的留言记录-->
+    <select id="findSome" parameterType="String" resultType="edu.usts.sddb.entity.LeaveMessage">
+		select * from t_leave_message
+		where le_author_id =#{id} or le_target_id=#{id}
+		order by le_time desc;
+	</select>
+
+
+    <!--抽取两个人的留言记录-->
+    <select id="findRecord" parameterType="String" resultType="edu.usts.sddb.entity.LeaveMessage">
+		select * from t_leave_message
+		where (le_author_id=#{0} and le_target_id=#{1})
+		or (le_author_id=#{1} and le_target_id=#{0})
+		order by le_time asc;
+
+	</select>
+
+    <!--将p1发给p2的留言记录设置为p2已读-->
+    <update id="setRead" parameterType="String">
+		update t_leave_message
+		set le_read=true
+		where le_author_id=#{0} and le_target_id=#{1}
+	</update>
+</mapper>

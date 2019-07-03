@@ -1,0 +1,583 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta charset="utf-8" />
+		<title>新增公告</title>
+
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+		<!-- bootstrap & fontawesome -->
+		<link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+
+		<!-- page specific plugin styles -->
+		<link rel="stylesheet" href="/assets/css/jquery-ui.custom.min.css" />
+
+		<!-- text fonts -->
+		<link rel="stylesheet" href="/assets/css/fonts.googleapis.com.css" />
+
+		<!-- ace styles -->
+		<link rel="stylesheet" href="/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+
+		<!--[if lte IE 9]>
+			<link rel="stylesheet" href="/assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
+		<![endif]-->
+		<link rel="stylesheet" href="/assets/css/ace-skins.min.css" />
+		<link rel="stylesheet" href="/assets/css/ace-rtl.min.css" />
+
+		<!--[if lte IE 9]>
+		  <link rel="stylesheet" href="/assets/css/ace-ie.min.css" />
+		<![endif]-->
+
+		<!-- inline styles related to this page -->
+
+		<!-- ace settings handler -->
+		<script src="/assets/js/ace-extra.min.js"></script>
+
+		<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+
+		<!--[if lte IE 8]>
+		<script src="/assets/js/html5shiv.min.js"></script>
+		<script src="/assets/js/respond.min.js"></script>
+		<![endif]-->
+	</head>
+
+	<body class="no-skin">
+		<div id="navbar" class="navbar navbar-default ace-save-state">
+			<div class="navbar-container ace-save-state" id="navbar-container">
+				<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+					<span class="sr-only">Toggle sidebar</span>
+
+					<span class="icon-bar"></span>
+
+					<span class="icon-bar"></span>
+
+					<span class="icon-bar"></span>
+				</button>
+
+				<div class="navbar-header pull-left">
+					<a href="/views/index.html" class="navbar-brand">
+						<small>
+							<i class="fa fa-leaf"></i>
+							学生发展数据综合评价与分析系统
+						</small>
+					</a>
+				</div>
+
+				<div class="navbar-buttons navbar-header pull-right" role="navigation">
+					<ul class="nav ace-nav">
+
+						<li class="light-blue dropdown-modal">
+							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+
+								<img class="nav-user-photo us_photo" src="/assets/images/avatars/blank.jpg" alt="个人头像" style="background-color:#fff" />
+
+								<span class="user-info">
+							       <span id="us_name"></span>
+								</span>
+
+								<i class="ace-icon fa fa-caret-down"></i>
+							</a>
+
+							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+								<li>
+									<a id="setting" target="_blank">
+										<i class="ace-icon fa fa-cog"></i> 设置
+									</a>
+								</li>
+
+								<li>
+									<a id="profile" target="_blank">
+										<i class="ace-icon fa fa-user"></i> 个人信息
+									</a>
+								</li>
+
+								<li class="divider"></li>
+
+								<li>
+									<a href="/login.html" onclick="logout()">
+										<i class="ace-icon fa fa-power-off"></i> 注销
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- /.navbar-container -->
+		</div>
+
+		<div class="main-container ace-save-state" id="main-container">
+			<script type="text/javascript">
+				try {
+					ace.settings.loadState('main-container')
+				} catch(e) {}
+			</script>
+
+			<div id="sidebar" class="sidebar                  responsive                    ace-save-state">
+				<script type="text/javascript">
+					try {
+						ace.settings.loadState('sidebar')
+					} catch(e) {}
+				</script>
+
+				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+						<button class="btn btn-success">
+							<i class="ace-icon fa fa-signal"></i>
+						</button>
+
+						<button class="btn btn-info">
+							<i class="ace-icon fa fa-pencil"></i>
+						</button>
+
+						<button class="btn btn-warning">
+							<i class="ace-icon fa fa-users"></i>
+						</button>
+
+						<button class="btn btn-danger">
+							<i class="ace-icon fa fa-cogs"></i>
+						</button>
+					</div>
+
+					<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+						<span class="btn btn-success"></span>
+
+						<span class="btn btn-info"></span>
+
+						<span class="btn btn-warning"></span>
+
+						<span class="btn btn-danger"></span>
+					</div>
+				</div>
+				<!-- /.sidebar-shortcuts -->
+
+				<ul class="nav nav-list">
+					<li class="active">
+						<a href="/views/index.html">
+							<i class="menu-icon fa fa-tachometer"></i>
+							<span class="menu-text"> 我的首页 </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+
+				</ul>
+				<!-- /.nav-list -->
+
+				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+					<i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+				</div>
+			</div>
+
+			<div class="main-content">
+				<div class="main-content-inner">
+					<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+						<ul class="breadcrumb">
+							<li>
+								<i class="ace-icon fa fa-home home-icon"></i>
+								<a href="/views/index.html">我的首页</a>
+							</li>
+							<li>
+								<a href="/views/notice/noticeDetail.html">公告详情</a>
+							</li>
+							<li class="active">编辑公告</li>
+						</ul>
+						<!-- /.breadcrumb -->
+
+					</div>
+
+					<div class="page-content">
+
+						<div class="page-header">
+							<h1>新增公告</h1>
+						</div>
+						<!-- /.page-header -->
+
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+
+								<div class="form-horizontal">
+
+									<div class="form-group">
+										<label class="col-sm-4 control-label no-padding-right" for="form-field-1"> 公告标题 </label>
+
+										<div class="col-sm-8">
+											<input type="text" id="no_title" class="col-xs-6 col-sm-6" style="font-size: 17px;color: black;" />
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+								</div>
+
+								<!--公告主体-->
+								<div class="wysiwyg-editor" id="editor1"></div>
+
+								<div class="widget-toolbox padding-4 clearfix" style="margin-top: 15px;">
+									<div class="btn-group pull-left">
+										<button class="btn btn-sm btn-default btn-white btn-round" id="btn_back">
+										<i class="ace-icon fa fa-times bigger-150"></i>
+											<span style="font-size: 20px;">返回</span>
+										</button>
+									</div>
+
+									<div class="btn-group pull-right">
+
+										<button class="btn btn-sm btn-success btn-white btn-round" id="add_notice" style="margin-left: 20px;">
+										<i class="ace-icon fa fa-globe bigger-175"></i>
+                                         	<span style="font-size: 20px;">发布</span>
+										<i class="ace-icon fa fa-arrow-right icon-on-right bigger-150"></i>
+										</button>
+									</div>
+								</div>
+
+								<div class="hr hr-double dotted"></div>
+
+								<!-- PAGE CONTENT ENDS -->
+							</div>
+							<!-- /.col -->
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /.page-content -->
+				</div>
+			</div>
+			<!-- /.main-content -->
+
+			<div class="footer">
+				<div class="footer-inner">
+					<div class="footer-content">
+						<span class="bigger-120">
+							<span class="blue bolder" style="margin-right: 10px;">学生发展数据综合评价与分析系统</span> 苏州科技大学 &copy; 2018-2019
+						</span>
+					</div>
+				</div>
+			</div>
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+			</a>
+		</div>
+		<!-- /.main-container -->
+
+		<!-- basic scripts -->
+
+		<!--[if !IE]> -->
+		<script src="/assets/js/jquery-2.1.4.min.js"></script>
+		<script src="/assets/js/jquery.cookie.js"></script>
+		<script src="/assets/js/sddb.util.js"></script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script src="/assets/js/jquery-1.11.3.min.js"></script>
+<![endif]-->
+		<script type="text/javascript">
+			if('ontouchstart' in document.documentElement) document.write("<script src='/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+		</script>
+		<script src="/assets/js/bootstrap.min.js"></script>
+
+		<!-- page specific plugin scripts -->
+		<script src="/assets/js/jquery-ui.custom.min.js"></script>
+		<script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
+		<script src="/assets/js/markdown.min.js"></script>
+		<script src="/assets/js/bootstrap-markdown.min.js"></script>
+		<script src="/assets/js/jquery.hotkeys.index.min.js"></script>
+		<script src="/assets/js/bootstrap-wysiwyg.min.js"></script>
+		<script src="/assets/js/bootbox.js"></script>
+
+		<!-- ace scripts -->
+		<script src="/assets/js/ace-elements.min.js"></script>
+		<script src="/assets/js/ace.min.js"></script>
+
+		<!-- inline scripts related to this page -->
+
+		<!--新增公告-->
+		<script type="text/javascript">
+			//新增一条
+			function addNotice() {
+				var no_title = $("#no_title").val();
+				var no_content = $("#editor1").html();
+				$.ajax({
+					type: "post",
+					url: "/notice/handleNotice.do",
+					dataType: "json",
+					data: {
+						"oper": "add",
+						"no_user_id": $.cookie("us_id"),
+						"no_title": no_title,
+						"no_content": no_content
+
+					},
+					success: function(data) {
+						if(data.success) {
+							window.opener.location.href = window.opener.location.href;
+							window.close();
+						} else {
+							alert("新增公告时发生错误！");
+						}
+					},
+					error: function(err) {
+						alert("新增公告时发生错误！" + JSON.stringify(err));
+					}
+				});
+
+			}
+
+			jQuery(function($) {
+
+				$("#btn_back").click(function() {
+					history.back(-1);
+				});
+				$("#add_notice").click(function() {
+					if($("#no_title").val() == "") {
+						alert("公告标题不可为空！");
+						return false;
+					}
+					if($("#editor1").html() == "") {
+						alert("公告内容不可为空！");
+						return false;
+					}
+					addNotice();
+				});
+
+			});
+		</script>
+
+		<script type="text/javascript">
+			jQuery(function($) {
+
+				$('textarea[data-provide="markdown"]').each(function() {
+					var $this = $(this);
+
+					if($this.data('markdown')) {
+						$this.data('markdown').showEditor();
+					} else $this.markdown()
+
+					$this.parent().find('.btn').addClass('btn-white');
+				})
+
+				function showErrorAlert(reason, detail) {
+					var msg = '';
+					if(reason === 'unsupported-file-type') {
+						msg = "Unsupported format " + detail;
+					} else {
+						//console.log("error uploading file", reason, detail);
+					}
+					$('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>' +
+						'<strong>File upload error</strong> ' + msg + ' </div>').prependTo('#alerts');
+				}
+
+				//$('#editor1').ace_wysiwyg();//this will create the default editor will all buttons
+
+				//but we want to change a few buttons colors for the third style
+				$('#editor1').ace_wysiwyg({
+					toolbar: [
+						'font',
+						null,
+						'fontSize',
+						null,
+						{
+							name: 'bold',
+							className: 'btn-info'
+						},
+						{
+							name: 'italic',
+							className: 'btn-info'
+						},
+						{
+							name: 'strikethrough',
+							className: 'btn-info'
+						},
+						{
+							name: 'underline',
+							className: 'btn-info'
+						},
+						null,
+						{
+							name: 'insertunorderedlist',
+							className: 'btn-success'
+						},
+						{
+							name: 'insertorderedlist',
+							className: 'btn-success'
+						},
+						{
+							name: 'outdent',
+							className: 'btn-purple'
+						},
+						{
+							name: 'indent',
+							className: 'btn-purple'
+						},
+						null,
+						{
+							name: 'justifyleft',
+							className: 'btn-primary'
+						},
+						{
+							name: 'justifycenter',
+							className: 'btn-primary'
+						},
+						{
+							name: 'justifyright',
+							className: 'btn-primary'
+						},
+						{
+							name: 'justifyfull',
+							className: 'btn-inverse'
+						},
+						null,
+						{
+							name: 'createLink',
+							className: 'btn-pink'
+						},
+						{
+							name: 'unlink',
+							className: 'btn-pink'
+						},
+						null,
+						{
+							name: 'insertImage',
+							className: 'btn-success'
+						},
+						null,
+						'foreColor',
+						null,
+						{
+							name: 'undo',
+							className: 'btn-grey'
+						},
+						{
+							name: 'redo',
+							className: 'btn-grey'
+						}
+					],
+					'wysiwyg': {
+						fileUploadError: showErrorAlert
+					}
+				}).prev().find('.btn-group > .btn').addClass('btn-white btn-round');
+
+				//make the editor have all the available height
+				$(window).on('resize.editor', function() {
+					var offset = $('#editor1').parent().offset();
+					var winHeight = $(this).height();
+
+					$('#editor1').css({
+						'height': winHeight - offset.top - 10,
+						'max-height': 'none'
+					});
+				}).triggerHandler('resize.editor');
+
+				$('#editor2').css({
+					'height': '200px'
+				}).ace_wysiwyg({
+					toolbar_place: function(toolbar) {
+						return $(this).closest('.widget-box')
+							.find('.widget-header').prepend(toolbar)
+							.find('.wysiwyg-toolbar').addClass('inline');
+					},
+					toolbar: [
+						'bold',
+						{
+							name: 'italic',
+							title: 'Change Title!',
+							icon: 'ace-icon fa fa-leaf'
+						},
+						'strikethrough',
+						null,
+						'insertunorderedlist',
+						'insertorderedlist',
+						null,
+						'justifyleft',
+						'justifycenter',
+						'justifyright'
+					],
+					speech_button: false
+				});
+
+				$('[data-toggle="buttons"] .btn').on('click', function(e) {
+					//var target = $(this).find('input[type=radio]');
+					var which = 4;
+					var toolbar = $('#editor1').prev().get(0);
+					if(which >= 1 && which <= 4) {
+						toolbar.className = toolbar.className.replace(/wysiwyg\-style(1|2)/g, '');
+						if(which == 1) $(toolbar).addClass('wysiwyg-style1');
+						else if(which == 2) $(toolbar).addClass('wysiwyg-style2');
+						if(which == 4) {
+							$(toolbar).find('.btn-group > .btn').addClass('btn-white btn-round');
+						} else $(toolbar).find('.btn-group > .btn-white').removeClass('btn-white btn-round');
+					}
+				});
+
+				//RESIZE IMAGE
+
+				//Add Image Resize Functionality to Chrome and Safari
+				//webkit browsers don't have image resize functionality when content is editable
+				//so let's add something using jQuery UI resizable
+				//another option would be opening a dialog for user to enter dimensions.
+				if(typeof jQuery.ui !== 'undefined' && ace.vars['webkit']) {
+
+					var lastResizableImg = null;
+
+					function destroyResizable() {
+						if(lastResizableImg == null) return;
+						lastResizableImg.resizable("destroy");
+						lastResizableImg.removeData('resizable');
+						lastResizableImg = null;
+					}
+
+					var enableImageResize = function() {
+						$('.wysiwyg-editor')
+							.on('mousedown', function(e) {
+								var target = $(e.target);
+								if(e.target instanceof HTMLImageElement) {
+									if(!target.data('resizable')) {
+										target.resizable({
+											aspectRatio: e.target.width / e.target.height,
+										});
+										target.data('resizable', true);
+
+										if(lastResizableImg != null) {
+											//disable previous resizable image
+											lastResizableImg.resizable("destroy");
+											lastResizableImg.removeData('resizable');
+										}
+										lastResizableImg = target;
+									}
+								}
+							})
+							.on('click', function(e) {
+								if(lastResizableImg != null && !(e.target instanceof HTMLImageElement)) {
+									destroyResizable();
+								}
+							})
+							.on('keydown', function() {
+								destroyResizable();
+							});
+					}
+
+					enableImageResize();
+
+					/**
+					//or we can load the jQuery UI dynamically only if needed
+					if (typeof jQuery.ui !== 'undefined') enableImageResize();
+					else {//load jQuery UI if not loaded
+						//in Ace demo ./components will be replaced by correct components path
+						$.getScript("/assets/js/jquery-ui.custom.min.js", function(data, textStatus, jqxhr) {
+							enableImageResize()
+						});
+					}
+					*/
+				}
+
+			});
+		</script>
+
+	</body>
+
+</html>

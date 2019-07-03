@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--1. 配置 SecurityManager!-->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <!--注入realm-->
+        <property name="realm" ref="myRealm"/>
+        <property name="cacheManager" ref="cacheManager"/>
+    </bean>
+
+    <!--2. 配置 CacheManager-->
+    <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <!--<property name="cacheManagerConfigFile" value="classpath:config/ehcache.xml"></property>-->
+    </bean>
+
+    <!--3. 自定义Realm -->
+    <bean id="myRealm" class="edu.usts.sddb.realm.MyRealm">
+        <property name="credentialsMatcher">
+            <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+                <!--指定加密算法为MD5-->
+                <property name="hashAlgorithmName" value="MD5"/>
+                <!--指定加密次数-->
+                <property name="hashIterations" value="2"/>
+            </bean>
+        </property>
+    </bean>
+
+
+    <!--6. Shiro过滤器-->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!--加载核心管理器 -->
+        <property name="securityManager" ref="securityManager"/>
+        <!--没有登录的时候会跳转到该页面-->
+        <property name="loginUrl" value="/login.html"/>
+        <!--当没有此权限时，会跳转到该页面-->
+        <property name="unauthorizedUrl" value="/views/unAuth.html"/>
+        <!-- Shiro连接约束配置,即过滤链的定义 -->
+        <property name="filterChainDefinitions">
+            <value>
+                <!--设置为anon，代表不拦截，不登录即可访问-->
+                /assets/** = anon
+                /user/login.do=anon
+                /user/register.do=anon
+                /login.html = anon
+                /logout = logout
+
+                <!--设置为authc，代表拦截，登录才可访问，但除了以上设置为anon的资源-->
+                /** = authc
+            </value>
+        </property>
+    </bean>
+</beans>

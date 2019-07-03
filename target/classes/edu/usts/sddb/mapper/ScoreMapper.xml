@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 此配置文件解决t_score表的基本增删改查 -->
+<mapper namespace="edu.usts.sddb.dao.ScoreDao">
+
+    <!-- 以下为此表的增删改查-->
+
+    <select id="findByPage" resultType="edu.usts.sddb.entity.Score">
+		select * from
+		t_score
+		order by sc_student_id desc
+		limit #{0},#{1}
+	</select>
+
+    <select id="getSum" resultType="int">
+		select count(*) from
+		t_score
+	</select>
+
+    <select id="findByFiltersSum" resultType="int" parameterType="string">
+		${_parameter}
+	</select>
+
+    <select id="findByFilters" parameterType="string" resultType="edu.usts.sddb.entity.Score">
+		${_parameter}
+	</select>
+
+    <insert id="add" parameterType="edu.usts.sddb.entity.Score">
+		replace into t_score
+		(sc_student_id,sc_student_name,sc_course_name,sc_course_credit,
+		sc_course_nature,sc_score,sc_remark,sc_gpa,
+		sc_make_up_score,sc_rebuild_score,sc_class_name,
+		sc_course_belong,sc_rebuild_mark,sc_select_course_id,sc_edu_year,
+		sc_edu_term)
+		VALUES (#{sc_student_id},#{sc_student_name},#{sc_course_name},#{sc_course_credit},
+		#{sc_course_nature},#{sc_score},#{sc_remark},#{sc_gpa},
+		#{sc_make_up_score},#{sc_rebuild_score},#{sc_class_name},
+		#{sc_course_belong},#{sc_rebuild_mark},#{sc_select_course_id},#{sc_edu_year},
+		#{sc_edu_term})
+    </insert>
+
+    <delete id="del">
+		delete from t_score where sc_id =#{sc_id}
+	</delete>
+
+
+    <update id="edit" parameterType="edu.usts.sddb.entity.Score">
+		update t_score set
+		sc_student_id=#{sc_student_id},sc_student_name=#{sc_student_name},sc_course_name=#{sc_course_name},
+		sc_course_credit=#{sc_course_credit},sc_course_nature=#{sc_course_nature},sc_score=#{sc_score},
+		sc_remark=#{sc_remark},sc_gpa=#{sc_gpa},sc_make_up_score=#{sc_make_up_score},sc_rebuild_score=#{sc_rebuild_score},
+		sc_class_name=#{sc_class_name},sc_course_belong=#{sc_course_belong},sc_rebuild_mark=#{sc_rebuild_mark},
+		sc_select_course_id=#{sc_select_course_id},sc_edu_year=#{sc_edu_year},sc_edu_term=#{sc_edu_term}
+		where
+		sc_id =#{sc_id}
+	</update>
+
+    <select id="findComment" resultType="edu.usts.sddb.entity.assist.DBComment">
+		show full fields from t_score
+	</select>
+
+    <select id="findAll" resultType="edu.usts.sddb.entity.Score">
+		select * from t_score order by sc_id asc
+	</select>
+
+    <!--增删改查结束-->
+
+
+    <select id="findCourseByClass" resultType="string" parameterType="string">
+		select distinct sc_course_name from t_score where sc_class_name = #{className}
+	</select>
+
+
+    <!-- 查询某个学生已经有哪些年度的成绩 -->
+    <select id="findYearByStuId" parameterType="String" resultType="java.lang.String">
+		select distinct sc_edu_year from t_score where
+		sc_student_id=#{sc_student_id}
+	</select>
+
+
+    <!-- 多参数查询不需要写parameterType,而是用占位符 -->
+    <!-- 查询一个学生的所有成绩，不包括不计入平均绩点的学科任选课，与重修课 -->
+    <select id="findScore" resultType="edu.usts.sddb.entity.Score">
+		select * from t_score where
+		sc_student_id=#{0}
+		and sc_edu_year=#{1}
+		and (sc_rebuild_mark = 0
+		or
+		sc_rebuild_mark is null )
+		and sc_course_nature not like '%任选%'
+
+	</select>
+
+    <select id="findScore1" resultType="edu.usts.sddb.entity.Score">
+		select * from t_score where
+		sc_student_id=#{0}
+		and (sc_rebuild_mark = 0
+		or
+		sc_rebuild_mark is null )
+		and sc_course_nature not like '%任选%'
+
+	</select>
+
+    <!-- -->
+    <select id="findAllScore" resultType="edu.usts.sddb.entity.Score">
+		select * from t_score where
+		sc_student_id=#{0}
+		and sc_edu_year=#{1}
+
+	</select>
+
+
+    <!--不包括任选课的所有成绩-->
+    <select id="findScoreIncludeRebuild" resultType="edu.usts.sddb.entity.Score">
+		select * from
+		t_score where
+		sc_student_id=#{0}
+		and sc_course_nature not like '%任选%'
+	</select>
+
+    <!-- 查询一个学生的重修成绩 -->
+    <select id="findRebuildScore" resultType="edu.usts.sddb.entity.Score">
+		select * from t_score
+		where
+		sc_student_id=#{id}
+		and sc_rebuild_mark = 1
+	</select>
+
+    <select id="findScoreByIDAndRemark" parameterType="string" resultType="edu.usts.sddb.entity.Score">
+		select * from t_score where sc_student_id=#{id} and
+		sc_rebuild_mark=1
+
+	</select>
+
+    <!-- 根据id查找学生姓名 -->
+    <select id="findNameById" parameterType="string" resultType="string">
+		select st_name from t_student where st_id=#{id}
+	</select>
+
+    <!-- 获取总学分，包括获得的与未获得的 -->
+    <select id="getCreditSum" parameterType="string" resultType="double">
+		select sc_course_credit from t_score
+		where sc_student_id=#{id}
+		and (
+		sc_rebuild_mark=0
+		or sc_rebuild_mark is null )
+	</select>
+    <select id="findScoreOfAll" resultType="edu.usts.sddb.entity.Score">
+		select * from t_score
+		where
+		sc_student_id=#{id} and sc_rebuild_mark=0
+	</select>
+
+
+    <select id="findBobyById" parameterType="string" resultType="double">
+		select sc_gpa from t_score where sc_student_id=#{id} and
+		sc_course_name like '%体育%'
+	</select>
+    <select id="findAllTerm" resultType="string">
+		select distinct
+		concat(sc_edu_year,'-',sc_edu_term) from t_score
+	</select>
+
+    <!-- 查询该学期的补考人次 -->
+    <select id="findMakeUpTimes" resultType="int">
+		select count(*) from t_score
+		where sc_edu_year=#{0} and sc_edu_term=#{1}
+		and sc_make_up_score is not null
+	</select>
+
+    <!-- 查询该学期的重修人次 -->
+    <select id="findRebuildTimes" resultType="int">
+		select count(*) from t_score
+		where sc_edu_year=#{0} and sc_edu_term=#{1}
+		and sc_rebuild_mark =1
+	</select>
+
+    <!--大数据分析服务开始-->
+
+    <!--查询某个学生未通过的核心必修课，如果补考通过或重修通过，依然取出来，主要为课程预警提供服务-->
+    <select id="getFailRequestCourse" parameterType="String" resultType="edu.usts.sddb.entity.Score">
+		select * from t_score
+		where sc_student_id=#{sc_student_id}
+		and sc_course_nature = '核心必修课'
+		and (sc_gpa=0.0 or sc_gpa is null)
+		and sc_rebuild_mark!=1
+		order by sc_edu_year asc,sc_edu_term asc;
+	</select>
+
+    <!--查询某个学生是否存在这个课程的考试记录-->
+    <select id="getCourse" parameterType="String" resultType="edu.usts.sddb.entity.Score">
+		select * from t_score
+		where sc_student_id=#{0}
+		and sc_course_name=#{1}
+		limit 1;
+	</select>
+
+    <!--查询某个课程的学分-->
+    <select id="getCourseCredit" parameterType="String" resultType="edu.usts.sddb.entity.Score">
+		select * from t_score
+		where sc_course_name=#{sc_course_name}
+		limit 1;
+	</select>
+
+    <!--查询一个学生所有的必修课成绩，不包含重修。即将重修的去掉，取最原始的数据-->
+    <select id="getAllRequireCourseById" parameterType="String" resultType="edu.usts.sddb.entity.Score">
+    	select * from t_score
+    	where sc_student_id=#{sc_student_id}
+    	and sc_course_nature = '核心必修课'
+    	and sc_rebuild_mark!=1
+		order by sc_edu_year asc,sc_edu_term asc;
+	</select>
+
+    <!--查询指定班的指定课程的平均绩点-->
+    <select id="getAverageByClassAndCourse" parameterType="String" resultType="double">
+		select avg(sc_gpa) from t_score
+		where sc_class_name=#{0}
+		and sc_course_name=#{1};
+	</select>
+
+    <!--大数据分析服务结束-->
+</mapper>

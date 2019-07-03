@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- 此配置文件解决t_competition表的基本增删改查 -->
+<mapper namespace="edu.usts.sddb.dao.CompetitionDao">
+
+    <select id="findAll" resultType="edu.usts.sddb.entity.Competition">
+		select * from t_competition order by co_id desc
+	</select>
+
+    <select id="findById" parameterType="String"
+            resultType="edu.usts.sddb.entity.Competition">
+		select * from t_competition where co_student_id = #{id}
+	</select>
+
+    <select id="findByName" parameterType="String"
+            resultType="edu.usts.sddb.entity.Competition">
+		select * from t_competition where co_student_name like
+		"%"#{name}"%"
+	</select>
+
+
+    <select id="findByPage" resultType="edu.usts.sddb.entity.Competition">
+		select * from
+		t_competition
+		order by co_id desc
+		limit #{0},#{1}
+	</select>
+
+    <select id="getSum" resultType="int">
+		select count(*) from
+		t_competition
+	</select>
+
+    <select id="findByFiltersSum" resultType="int" parameterType="string">
+		${_parameter}
+	</select>
+
+    <select id="findByFilters" parameterType="string" resultType="edu.usts.sddb.entity.Competition">
+		${_parameter}
+	</select>
+
+    <insert id="add" parameterType="edu.usts.sddb.entity.Competition">
+		insert into t_competition (co_student_id,co_student_name,co_major_name,
+		co_name,co_level,co_awards,co_sponsor,co_time_award,co_teachers)
+		values (#{co_student_id},#{co_student_name},#{co_major_name},#{co_name},
+		#{co_level},#{co_awards},#{co_sponsor},#{co_time_award},#{co_teachers})
+	</insert>
+
+    <delete id="del" parameterType="string">
+		delete from t_competition where co_id = #{co_id}
+	</delete>
+
+
+    <update id="edit" parameterType="edu.usts.sddb.entity.Advice">
+		update t_competition set
+		co_student_id=#{co_student_id},co_student_name=#{co_student_name},
+		co_major_name=#{co_major_name},co_name=#{co_name},co_level=#{co_level},
+		co_awards=#{co_awards},co_sponsor=#{co_sponsor},co_time_award=#{co_time_award},
+		co_teachers=#{co_teachers}
+		where
+		co_id=#{co_id}
+	</update>
+
+
+    <!--返回表中注释-->
+    <select id="findComment" resultType="edu.usts.sddb.entity.assist.DBComment">
+		show full fields from t_competition
+	</select>
+
+</mapper>

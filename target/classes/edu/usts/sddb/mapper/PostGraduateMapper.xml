@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 此配置文件解决t_post_graduate表的基本增删改查  -->
+<mapper namespace="edu.usts.sddb.dao.PostGraduateDao">
+    <select id="findAll" resultType="edu.usts.sddb.entity.PostGraduate">
+		select * from t_post_graduate order by po_id desc
+	</select>
+
+    <select id="findByname" parameterType="string" resultType="edu.usts.sddb.entity.PostGraduate">
+		select * from t_post_graduate where po_student_name=#{name}
+	</select>
+
+    <select id="findByPage" resultType="edu.usts.sddb.entity.PostGraduate">
+		select * from
+		t_post_graduate
+		order by po_id desc
+		limit #{0},#{1}
+	</select>
+
+    <select id="getSum" resultType="int">
+		select count(*) from t_post_graduate
+	</select>
+
+    <select id="findByFiltersSum" resultType="int" parameterType="string">
+		${_parameter}
+	</select>
+
+    <select id="findByFilters" parameterType="string" resultType="edu.usts.sddb.entity.PostGraduate">
+		${_parameter}
+	</select>
+
+    <insert id="add" parameterType="edu.usts.sddb.entity.PostGraduate">
+		insert into t_post_graduate(po_student_name,
+		po_politics_status,po_exam_score,po_old_major,
+		po_new_school,po_new_major)
+		values (#{po_student_name},#{po_politics_status},
+		#{po_exam_score},#{po_old_major},#{po_new_school},
+		#{po_new_major})
+	</insert>
+
+    <delete id="del" parameterType="string">
+		delete from t_post_graduate where po_id = #{po_id}
+	</delete>
+
+
+    <update id="edit" parameterType="edu.usts.sddb.entity.PostGraduate">
+		update t_post_graduate set
+		po_student_name=#{po_student_name},po_politics_status=#{po_politics_status},
+		po_exam_score=#{po_exam_score},po_old_major=#{po_old_major},po_new_school=#{po_new_school},
+		po_new_major=#{po_new_major}
+		where
+		po_id=#{po_id}
+	</update>
+
+    <!--返回表中注释-->
+    <select id="findComment" resultType="edu.usts.sddb.entity.assist.DBComment">
+		show full fields from t_post_graduate
+	</select>
+
+</mapper>

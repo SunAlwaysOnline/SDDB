@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta charset="utf-8" />
+		<title>宿舍情况分析</title>
+
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+		<!-- bootstrap & fontawesome -->
+		<link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+
+		<!-- page specific plugin styles -->
+		<link rel="stylesheet" href="/assets/css/jquery-ui.min.css" />
+
+		<!-- text fonts -->
+		<link rel="stylesheet" href="/assets/css/fonts.googleapis.com.css" />
+
+		<!-- ace styles -->
+		<link rel="stylesheet" href="/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+
+		<!--[if lte IE 9]>
+			<link rel="stylesheet" href="/assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
+		<![endif]-->
+		<link rel="stylesheet" href="/assets/css/ace-skins.min.css" />
+		<link rel="stylesheet" href="/assets/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="/assets/css/select2.min.css" media="screen" />
+		<link rel="stylesheet" href="/assets/css/theme.blue.css" />
+		<link rel="stylesheet" href="/assets/css/sddb.css" />
+		<!--[if lte IE 9]>
+		  <link rel="stylesheet" href="/assets/css/ace-ie.min.css" />
+		<![endif]-->
+
+		<!-- inline styles related to this page -->
+
+		<!-- ace settings handler -->
+		<script src="/assets/js/ace-extra.min.js"></script>
+
+		<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+
+		<!--[if lte IE 8]>
+		<script src="/assets/js/html5shiv.min.js"></script>
+		<script src="/assets/js/respond.min.js"></script>
+		<![endif]-->
+	</head>
+
+	<body class="no-skin">
+		<div id="navbar" class="navbar navbar-default          ace-save-state">
+			<div class="navbar-container ace-save-state" id="navbar-container">
+				<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+					<span class="sr-only">Toggle sidebar</span>
+
+					<span class="icon-bar"></span>
+
+					<span class="icon-bar"></span>
+
+					<span class="icon-bar"></span>
+				</button>
+
+				<div class="navbar-header pull-left">
+					<a href="/views/index.html" class="navbar-brand">
+						<small>
+							<i class="fa fa-leaf"></i>
+							学生发展数据综合评价与分析系统
+						</small>
+					</a>
+				</div>
+
+				<div class="navbar-buttons navbar-header pull-right" role="navigation">
+					<ul class="nav ace-nav">
+
+						<li class="light-blue dropdown-modal">
+							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+
+								<img class="nav-user-photo us_photo" src="/assets/images/avatars/blank.jpg" alt="个人头像" style="background-color:#fff" />
+
+								<span class="user-info">
+							       <span id="us_name"></span>
+								</span>
+
+								<i class="ace-icon fa fa-caret-down"></i>
+							</a>
+
+							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+								<li>
+									<a id="setting" target="_blank">
+										<i class="ace-icon fa fa-cog"></i> 设置
+									</a>
+								</li>
+
+								<li>
+									<a id="profile" target="_blank">
+										<i class="ace-icon fa fa-user"></i> 个人信息
+									</a>
+								</li>
+
+								<li class="divider"></li>
+
+								<li>
+									<a href="/login.html" onclick="logout()">
+										<i class="ace-icon fa fa-power-off"></i> 注销
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- /.navbar-container -->
+		</div>
+
+		<div class="main-container ace-save-state" id="main-container">
+			<script type="text/javascript">
+				try {
+					ace.settings.loadState('main-container')
+				} catch(e) {}
+			</script>
+
+			<div id="sidebar" class="sidebar                  responsive                    ace-save-state">
+				<script type="text/javascript">
+					try {
+						ace.settings.loadState('sidebar')
+					} catch(e) {}
+				</script>
+
+				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+						<button class="btn btn-success">
+							<i class="ace-icon fa fa-signal"></i>
+						</button>
+
+						<button class="btn btn-info">
+							<i class="ace-icon fa fa-pencil"></i>
+						</button>
+
+						<button class="btn btn-warning">
+							<i class="ace-icon fa fa-users"></i>
+						</button>
+
+						<button class="btn btn-danger">
+							<i class="ace-icon fa fa-cogs"></i>
+						</button>
+					</div>
+
+					<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+						<span class="btn btn-success"></span>
+
+						<span class="btn btn-info"></span>
+
+						<span class="btn btn-warning"></span>
+
+						<span class="btn btn-danger"></span>
+					</div>
+				</div>
+				<!-- /.sidebar-shortcuts -->
+
+				<ul class="nav nav-list">
+					<li class="">
+						<a href="/views/index.html">
+							<i class="menu-icon fa fa-tachometer"></i>
+							<span class="menu-text"> 我的首页 </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-tasks"></i>
+							<span class="menu-text"> 数据管理 </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+
+							<li class="">
+								<a href="/views/dataManage/studentManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 学生
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/teacherManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 教师
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/majorManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 专业
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/classroomManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 班级
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/scoreManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 成绩
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/certificateManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 证书
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/competitionManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 竞赛
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/innovationTrainManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 创新训练
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/scholarshipManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 奖学金
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/excellentStudentManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 优秀学生
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/pushExcellentManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 推优
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/partyMemberManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 入党
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/postGraduateManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 考研录取
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/volunteerManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 志愿服务
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/dutyManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 学生干部
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/adviceManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 发展建议
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+						</ul>
+					</li>
+
+					<li class="active open">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-bar-chart-o"></i>
+							<span class="menu-text"> 数据分析 </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="">
+								<a href="#" class="dropdown-toggle">
+									<i class="menu-icon fa fa-caret-right"></i> 个人情况分析
+									<b class="arrow fa fa-angle-down"></b>
+								</a>
+
+								<b class="arrow"></b>
+
+								<ul class="submenu">
+									<li class="">
+										<a href="/views/dataAnalysis/student/personalGrade.html">
+											<i class="menu-icon fa fa-leaf green"></i>个人成绩查询
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+									<li class="">
+										<a href="/views/dataAnalysis/student/personalAllInfo.html">
+											<i class="menu-icon fa fa-leaf green"></i>发展综合分析
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+
+								</ul>
+							</li>
+
+							<li class="active">
+								<a href="/views/dataAnalysis/dorm/dormAtmosphere.html">
+									<i class="menu-icon fa fa-caret-right"></i> 宿舍情况分析
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="/views/dataAnalysis/classroom/classAtmosphere.html">
+									<i class="menu-icon fa fa-caret-right"></i> 班级情况分析
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="#" class="dropdown-toggle">
+									<i class="menu-icon fa fa-caret-right"></i> 整体学业分析
+									<b class="arrow fa fa-angle-down"></b>
+								</a>
+
+								<b class="arrow"></b>
+
+								<ul class="submenu">
+									<li class="">
+										<a href="/views/dataAnalysis/all/allGrade.html">
+											<i class="menu-icon fa fa-leaf green"></i>学分积欠情况分析
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+									<li class="">
+										<a href="/views/dataAnalysis/all/make_up_rebuild.html">
+											<i class="menu-icon fa fa-leaf green"></i>补考重修情况分析
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+
+								</ul>
+							</li>
+
+						</ul>
+					</li>
+
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-book"></i>
+							<span class="menu-text"> 数据预测 </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="">
+								<a href="/views/bigDataAnalysis/courseDependence.html">
+									<i class="menu-icon fa fa-caret-right"></i> 课程通过预警
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="/views/bigDataAnalysis/scorePosition.html">
+									<i class="menu-icon fa fa-caret-right"></i> 成绩位置预测
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="/views/bigDataAnalysis/postGraduate.html">
+									<i class="menu-icon fa fa-caret-right"></i> 考研录取预测
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="/views/bigDataAnalysis/partyMember.html">
+									<i class="menu-icon fa fa-caret-right"></i> 入党情况预测
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+						</ul>
+					</li>
+
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-folder-open-o"></i>
+							<span class="menu-text"> 文件操作 </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="">
+								<a href="/views/file/fileUpload.html">
+									<i class="menu-icon fa fa-caret-right"></i> 文件上传
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/file/fileDownload.html">
+									<i class="menu-icon fa fa-caret-right"></i> 文件下载
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+						</ul>
+					</li>
+
+				</ul>
+				<!-- /.nav-list -->
+
+				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+					<i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+				</div>
+			</div>
+
+			<div class="main-content">
+				<div class="main-content-inner">
+					<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+						<ul class="breadcrumb">
+							<li>
+								<i class="ace-icon fa fa-home home-icon"></i>
+								<a href="/views/index.html">首页</a>
+							</li>
+
+							<li class="active">宿舍情况分析</li>
+						</ul>
+						<!-- /.breadcrumb -->
+
+					</div>
+
+					<div class="page-content">
+
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+								<div class="row">
+									<div class="col-sm-10">
+										<h3 class="header blue lighter smaller">
+											<i class="ace-icon fa fa-spinner"></i>
+											指定宿舍情况分析
+										</h3>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-2">
+										<center>
+											<label for="d_name">选择宿舍 : </label>
+											<select name="d_name" id="d_name" style="width: 160px;margin-left: 5px;" class="select2">
+
+											</select>
+										</center>
+									</div>
+
+									<div class="col-sm-1">
+										<center>
+											<button id="query" class="btn btn-info btn-sm">
+										<span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
+									&nbsp;查&nbsp;找&nbsp;
+									  </button>
+										</center>
+									</div>
+
+								</div>
+
+								<div class="row">
+									<div class="col-sm-10">
+										<h3 class="header blue lighter smaller">
+										</h3>
+									</div>
+								</div>
+
+								<div class="row">
+									<!--宿舍排名-->
+									<div class="col-sm-11">
+										<div class="widget-box transparent">
+											<div class="widget-header widget-header-flat">
+												<h4 class="widget-title lighter">
+													<i class="glyphicon glyphicon-stats orange"></i>
+													宿舍排名
+												</h4>
+
+												<div class="widget-toolbar">
+													<a href="#" data-action="collapse">
+														<i class="ace-icon fa fa-chevron-up"></i>
+													</a>
+												</div>
+											</div>
+
+											<div class="widget-body">
+												<div class="widget-main no-padding">
+
+													<div class="row" style="margin-top: 15px;">
+														<div class="col-sm-2">
+															<a href="" onclick="return false"><span class="glyphicon glyphicon-signal bigger-110" style="margin-right: 3px;"></span></a>
+															<font size="3">学习排名:</font>
+															<font size="3" id="score_rank"></font>
+														</div>
+														<div class="col-sm-2">
+															<a href="" onclick="return false"><span class="glyphicon glyphicon-signal bigger-110" style="margin-right: 3px;"></span></a>
+															<font size="3">体育排名:</font>
+															<font size="3" id="body_rank"></font>
+														</div>
+														<div class="col-sm-2">
+															<a href="" onclick="return false"><span class="glyphicon glyphicon-signal bigger-110" style="margin-right: 3px;"></span></a>
+															<font size="3">科研排名:</font>
+															<font size="3" id="scientific_rank"></font>
+														</div>
+														<div class="col-sm-2">
+															<a href="" onclick="return false"><span class="glyphicon glyphicon-signal bigger-110" style="margin-right: 3px;"></span></a>
+															<font size="3">志愿排名:</font>
+															<font size="3" id="volunteer_rank"></font>
+														</div>
+														<div class="col-sm-2">
+															<a href="" onclick="return false"><span class="glyphicon glyphicon-signal bigger-110" style="margin-right: 3px;"></span></a>
+															<font size="3">总评排名:</font>
+															<font size="3" id="all_rank"></font>
+														</div>
+
+													</div>
+
+												</div>
+												<!-- /.widget-main -->
+											</div>
+											<!-- /.widget-body -->
+										</div>
+										<!-- /.widget-box -->
+									</div>
+									<!-- /.col -->
+
+								</div>
+
+								<div class="row">
+									<div class="col-sm-10">
+										<h3 class="header blue lighter smaller">
+										</h3>
+									</div>
+								</div>
+
+								<div class="row">
+									<!--个人获奖-->
+									<div class="col-sm-11">
+										<div class="widget-box transparent">
+											<div class="widget-header widget-header-flat">
+												<h4 class="widget-title lighter">
+													<i class="ace-icon fa fa-star orange"></i>
+													宿舍成员情况
+												</h4>
+
+												<div class="widget-toolbar">
+													<a href="#" data-action="collapse">
+														<i class="ace-icon fa fa-chevron-up"></i>
+													</a>
+												</div>
+											</div>
+
+											<div class="widget-body">
+												<div class="widget-main no-padding">
+													<table class="table table-bordered table-striped table-hover tablesorter tablesorter-blue" style="margin-left: 20px;margin-top: 25px;" id="dorm_member">
+														<thead class="thin-border-bottom" style="visibility: hidden;" id="dorm_member_title">
+															<tr>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="4">宿舍</font>
+																</th>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="4">床号</font>
+																</th>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="4">学号</font>
+																</th>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="4">姓名</font>
+																</th>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="4">性别</font>
+																</th>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="4">班级</font>
+																</th>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="4">学习</font>
+																</th>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="4">体育</font>
+																</th>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="4">科研</font>
+																</th>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="4">志愿</font>
+																</th>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="4">总评</font>
+																</th>
+															</tr>
+														</thead>
+														<tbody id="dorm_member_tbody"></tbody>
+													</table>
+												</div>
+												<!-- /.widget-main -->
+											</div>
+											<!-- /.widget-body -->
+										</div>
+										<!-- /.widget-box -->
+									</div>
+									<!-- /.col -->
+
+								</div>
+
+								<div class="row">
+									<div class="col-sm-12">
+										<h3 class="header blue lighter smaller">
+										</h3>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-sm-10">
+										<h3 class="header blue lighter smaller">
+											<i class="ace-icon fa fa-spinner"></i>
+											全部宿舍情况分析
+										</h3>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-1">
+										<button id="dorm_state_query" class="btn btn-info btn-sm" style="margin-left: 20px;">
+										<span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
+									&nbsp;查&nbsp;找&nbsp;全&nbsp;部&nbsp;
+									  </button>
+
+									</div>
+
+									<div>
+										<i class="ace-icon fa fa-spinner fa-spin orange bigger-250" style="visibility: hidden;margin-left: 30px;" id="load"></i>
+									</div>
+
+								</div>
+
+								<div class="row">
+									<div class="col-sm-10">
+										<h3 class="header blue lighter smaller">
+										</h3>
+									</div>
+								</div>
+
+								<div class="row">
+									<!--全部宿舍情况-->
+									<div class="col-sm-11">
+										<div class="widget-box transparent">
+											<div class="widget-header widget-header-flat">
+												<h4 class="widget-title lighter">
+													<i class="ace-icon fa fa-star orange"></i>
+													全部宿舍情况
+												</h4>
+
+												<div class="widget-toolbar">
+													<a href="#" data-action="collapse">
+														<i class="ace-icon fa fa-chevron-up"></i>
+													</a>
+												</div>
+											</div>
+
+											<div class="widget-body">
+												<div class="widget-main no-padding">
+													<table class="table table-bordered table-striped table-hover tablesorter tablesorter-blue" style="margin-left: 20px;margin-top: 25px;" id="dorm_state">
+														<thead class="thin-border-bottom" style="visibility: hidden;" id="dorm_state_title">
+															<tr>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="4">宿舍</font>
+																</th>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="4">人数</font>
+																</th>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="4">学习</font>
+																</th>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="4">体育</font>
+																</th>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="4">科研</font>
+																</th>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="4">志愿</font>
+																</th>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="4">总评</font>
+																</th>
+
+															</tr>
+														</thead>
+														<tbody id="dorm_state_tbody"></tbody>
+													</table>
+												</div>
+												<!-- /.widget-main -->
+											</div>
+											<!-- /.widget-body -->
+										</div>
+										<!-- /.widget-box -->
+									</div>
+									<!-- /.col -->
+
+								</div>
+
+								<!-- /.row -->
+								<div class="row">
+									<div class="col-sm-10">
+										<div class="hr hr24 hr-dotted"></div>
+									</div>
+								</div>
+
+							</div>
+
+							<!-- PAGE CONTENT ENDS -->
+
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /.page-content -->
+				</div>
+			</div>
+			<!-- /.main-content -->
+
+			<div class="footer">
+				<div class="footer-inner">
+					<div class="footer-content">
+						<span class="bigger-120">
+							<span class="blue bolder" style="margin-right: 10px;">学生发展数据综合评价与分析系统</span> 苏州科技大学 &copy; 2018-2019
+						</span>
+
+					</div>
+				</div>
+			</div>
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+			</a>
+		</div>
+		<!-- /.main-container -->
+
+		<!-- basic scripts -->
+
+		<!--[if !IE]> -->
+		<script src="/assets/js/jquery-2.1.4.min.js"></script>
+		<script src="/assets/js/jquery.form.js"></script>
+		<script src="/assets/js/jquery.cookie.js"></script>
+		<script src="/assets/js/sddb.util.js"></script>
+		<script src="/assets/js/select2.min.js"></script>
+		<script src="/assets/js/jquery.tablesorter.js"></script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script src="/assets/js/jquery-1.11.3.min.js"></script>
+<![endif]-->
+		<script type="text/javascript">
+			if('ontouchstart' in document.documentElement) document.write("<script src='/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+		</script>
+		<script src="/assets/js/bootstrap.min.js"></script>
+
+		<!-- page specific plugin scripts -->
+		<script src="/assets/js/jquery-ui.min.js"></script>
+		<script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
+
+		<!-- ace scripts -->
+		<script src="/assets/js/ace-elements.min.js"></script>
+		<script src="/assets/js/ace.min.js"></script>
+
+		<!-- inline scripts related to this page -->
+
+		<!-- ECharts单文件引入 -->
+		<!-- 标签式单文件引入 -->
+		<script src="/assets/js/echarts-all.js"></script>
+
+		<!--选择宿舍-->
+		<script type="text/javascript">
+			$(function() {
+				$.ajax({
+					type: "post",
+					url: "/dorm/findDistinctDorm",
+					dataType: "json",
+					data: {},
+
+					success: function(data) {
+						$("#d_name").empty();
+						var d_name = document.getElementById("d_name");
+						for(var i = 0; i < data.length; i++) {
+							d_name.options[i] = new Option(data[i], data[i]);
+						}
+						//初始化select2
+						$("#d_name").select2();
+
+					},
+					error: function(err) {
+						alert("获取宿舍信息失败!");
+					}
+				});
+			})
+		</script>
+
+		<!--获取排名-->
+		<script>
+			$("#query").click(function() {
+
+				$("#score_rank").html("正在计算中...");
+				$("#body_rank").html("正在计算中...");
+				$("#scientific_rank").html("正在计算中...");
+				$("#volunteer_rank").html("正在计算中...");
+				$("#all_rank").html("正在计算中...");
+
+				$.ajax({
+					type: "post",
+					url: "/dorm/getDormRank",
+					dataType: "json",
+					data: {
+						"d_name": $("#d_name").val()
+					},
+					success: function(data) {
+						$("#score_rank").html(data.score);
+						$("#body_rank").html(data.body);
+						$("#scientific_rank").html(data.scientific);
+						$("#volunteer_rank").html(data.volunteer);
+						$("#all_rank").html(data.all);
+					},
+					error: function(err) {
+						alert("获取排名失败...");
+					}
+				});
+			});
+		</script>
+
+		<!--宿舍成员情况 -->
+		<script type="text/javascript">
+			//ajax请求数据
+			$(function() {
+				$("#query").click(function() {
+
+					//清空之前的行
+					$("#dorm_member tbody").html("");
+
+					$.ajax({
+						type: "post",
+						url: "/dorm/getDormMemberScore",
+						dataType: "json",
+						data: {
+							"d_name": $("#d_name").val()
+						},
+
+						success: function(data) {
+
+							var table = document.getElementById("dorm_member");
+							var t_body = document.getElementById("dorm_member_tbody");
+							for(var i = 0; i < data.length; i++) {
+								var t_tr = document.createElement("tr");
+								var td_d_name = document.createElement("td");
+								var td_d_no = document.createElement("td");
+								var td_d_st_id = document.createElement("td");
+								var td_d_st_name = document.createElement("td");
+								var td_d_st_sex = document.createElement("td");
+								var td_d_st_class = document.createElement("td");
+								var td_score = document.createElement("td");
+								var td_body = document.createElement("td");
+								var td_science = document.createElement("td");
+								var td_volunteer = document.createElement("td");
+								var td_all = document.createElement("td");
+
+								td_d_name.innerHTML = "<font size='3' color='#000000'>" + data[i].d_name + "</font>";
+								td_d_no.innerHTML = "<font size='3' color='#000000'>" + data[i].d_no + "</font>";
+								td_d_st_id.innerHTML = "<font class='p_st_id' size='3' color='#000000' onclick='window.open(\"/views/userInformation/studentProfile.html?id=\"+this.innerHTML,\"_blank\")' style='cursor:pointer' title='查看详情'>" + data[i].d_st_id + "</font>";
+								td_d_st_name.innerHTML = "<font size='3' color='#000000'>" + data[i].d_st_name + "</font>";
+								td_d_st_sex.innerHTML = "<font size='3' color='#000000'>" + data[i].d_st_sex + "</font>";
+								td_d_st_class.innerHTML = "<font size='3' color='#000000'>" + data[i].d_st_class + "</font>";
+								td_score.innerHTML = "<font size='3' color='#000000'>" + data[i].scorePart + "</font>";
+								td_body.innerHTML = "<font size='3' color='#000000'>" + data[i].bodyPart + "</font>";
+								td_science.innerHTML = "<font size='3' color='#000000'>" + data[i].scientificPart + "</font>";
+								td_volunteer.innerHTML = "<font size='3' color='#000000'>" + data[i].volunteerPart + "</font>";
+								td_all.innerHTML = "<font size='3' color='#000000'>" + data[i].all + "</font>";
+
+								t_tr.appendChild(td_d_name);
+								t_tr.appendChild(td_d_no);
+								t_tr.appendChild(td_d_st_id);
+								t_tr.appendChild(td_d_st_name);
+								t_tr.appendChild(td_d_st_sex);
+								t_tr.appendChild(td_d_st_class);
+								t_tr.appendChild(td_score);
+								t_tr.appendChild(td_body);
+								t_tr.appendChild(td_science);
+								t_tr.appendChild(td_volunteer);
+								t_tr.appendChild(td_all);
+
+								t_body.appendChild(t_tr);
+							}
+							table.appendChild(t_body);
+
+							document.getElementById("dorm_member_title").style.visibility = "visible";
+
+							//使表格可以排序,第二句不可缺少，否则会将上一次的数据带进来
+							$("#dorm_member").tablesorter();
+							$("#dorm_member").trigger("update");
+
+						},
+						error: function(err) {
+							alert("发生错误");
+						}
+
+					});
+				});
+			});
+		</script>
+
+		<!--全部宿舍情况 -->
+		<script type="text/javascript">
+			//ajax请求数据
+			$(function() {
+				$("#dorm_state_query").click(function() {
+					$("#load").css("visibility", "visible");
+					//清空之前的行
+					$("#dorm_state tbody").html("");
+
+					$.ajax({
+						type: "post",
+						url: "/dorm/getAllDormState",
+						dataType: "json",
+						data: {},
+
+						success: function(data) {
+							$("#load").css("visibility", "hidden");
+
+							var table = document.getElementById("dorm_state");
+							var t_body = document.getElementById("dorm_state_tbody");
+							for(var i = 0; i < data.length; i++) {
+								var t_tr = document.createElement("tr");
+								var td_d_name = document.createElement("td");
+								var td_d_num = document.createElement("td");
+								var td_d_score = document.createElement("td");
+								var td_d_body = document.createElement("td");
+								var td_d_scientific = document.createElement("td");
+								var td_d_volunteer = document.createElement("td");
+								var td_d_all = document.createElement("td");
+
+								td_d_name.innerHTML = "<font size='3' color='#000000'>" + data[i].name + "</font>";
+								td_d_num.innerHTML = "<font size='3' color='#000000'>" + data[i].num + "</font>";
+								td_d_score.innerHTML = "<font size='3' color='#000000'>" + data[i].score + "</font>";
+								td_d_body.innerHTML = "<font size='3' color='#000000'>" + data[i].body + "</font>";
+								td_d_scientific.innerHTML = "<font size='3' color='#000000'>" + data[i].scientific + "</font>";
+								td_d_volunteer.innerHTML = "<font size='3' color='#000000'>" + data[i].volunteer + "</font>";
+								td_d_all.innerHTML = "<font size='3' color='#000000'>" + data[i].all + "</font>";
+
+								t_tr.appendChild(td_d_name);
+								t_tr.appendChild(td_d_num);
+								t_tr.appendChild(td_d_score);
+								t_tr.appendChild(td_d_body);
+								t_tr.appendChild(td_d_scientific);
+								t_tr.appendChild(td_d_volunteer);
+								t_tr.appendChild(td_d_all);
+
+								t_body.appendChild(t_tr);
+							}
+
+							table.appendChild(t_body);
+
+							document.getElementById("dorm_state_title").style.visibility = "visible";
+
+							//使表格可以排序,第二句不可缺少，否则会将上一次的数据带进来
+							$("#dorm_state").tablesorter();
+							$("#dorm_state").trigger("update");
+
+						},
+						error: function(err) {
+							alert("发生错误");
+						}
+
+					});
+				});
+			});
+		</script>
+
+	</body>
+
+</html>

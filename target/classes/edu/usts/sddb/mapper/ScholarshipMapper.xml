@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- 此配置文件解决t_scholarship表的基本增删改查 -->
+<mapper namespace="edu.usts.sddb.dao.ScholarshipDao">
+
+	<select id="findAll" resultType="edu.usts.sddb.entity.Scholarship">
+		select * from t_scholarship order by sc_id asc
+	</select>
+
+    <select id="findById" parameterType="String" resultType="edu.usts.sddb.entity.Scholarship">
+		select * from t_scholarship where sc_student_id = #{id}
+	</select>
+
+    <select id="findByName" parameterType="String" resultType="edu.usts.sddb.entity.Scholarship">
+		select * from t_scholarship where sc_student_name = #{name}
+	</select>
+
+    <select id="findScholarshipByPage" resultType="edu.usts.sddb.entity.Scholarship">
+		select * from
+		t_scholarship
+		order by sc_id desc
+		limit #{0},#{1}
+	</select>
+
+
+    <select id="getScholarshipSum" resultType="int">
+		select count(*) from
+		t_scholarship
+	</select>
+
+    <select id="findByFiltersSum" resultType="int" parameterType="string">
+		${_parameter}
+	</select>
+
+    <select id="findByFilters" parameterType="string" resultType="edu.usts.sddb.entity.Scholarship">
+		${_parameter}
+	</select>
+
+    <insert id="add" parameterType="edu.usts.sddb.entity.Scholarship">
+	replace into t_scholarship(sc_student_id,sc_student_name,sc_student_major,sc_year,sc_awards,sc_money)
+	values (#{sc_student_id},#{sc_student_name},#{sc_student_major},#{sc_year},#{sc_awards},#{sc_money})
+	</insert>
+
+    <delete id="del" parameterType="string">
+		delete from t_scholarship where sc_id = #{sc_id}
+	</delete>
+
+
+    <update id="edit" parameterType="edu.usts.sddb.entity.Scholarship">
+		update t_scholarship set
+		sc_student_id=#{sc_student_id},sc_student_name=#{sc_student_name},
+		sc_student_major=#{sc_student_major},sc_awards=#{sc_awards},
+		sc_money=#{sc_money}
+		where
+		sc_id=#{sc_id}
+	</update>
+
+	<!--返回表中注释-->
+	<select id="findComment" resultType="edu.usts.sddb.entity.assist.DBComment">
+		show full fields from t_scholarship
+	</select>
+
+</mapper>

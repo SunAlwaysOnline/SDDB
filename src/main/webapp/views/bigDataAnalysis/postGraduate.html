@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta charset="utf-8" />
+		<title>考研录取预测</title>
+
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+		<!-- bootstrap & fontawesome -->
+		<link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+
+		<!-- page specific plugin styles -->
+		<link rel="stylesheet" href="/assets/css/jquery-ui.min.css" />
+
+		<!-- text fonts -->
+		<link rel="stylesheet" href="/assets/css/fonts.googleapis.com.css" />
+
+		<!-- ace styles -->
+		<link rel="stylesheet" href="/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+
+		<!--[if lte IE 9]>
+			<link rel="stylesheet" href="/assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
+		<![endif]-->
+		<link rel="stylesheet" href="/assets/css/ace-skins.min.css" />
+		<link rel="stylesheet" href="/assets/css/ace-rtl.min.css" />
+
+		<!--[if lte IE 9]>
+		  <link rel="stylesheet" href="/assets/css/ace-ie.min.css" />
+		<![endif]-->
+
+		<!-- inline styles related to this page -->
+
+		<!-- ace settings handler -->
+		<script src="/assets/js/ace-extra.min.js"></script>
+
+		<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+
+		<!--[if lte IE 8]>
+		<script src="/assets/js/html5shiv.min.js"></script>
+		<script src="/assets/js/respond.min.js"></script>
+		<![endif]-->
+	</head>
+
+	<body class="no-skin">
+		<div id="navbar" class="navbar navbar-default          ace-save-state">
+			<div class="navbar-container ace-save-state" id="navbar-container">
+				<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+					<span class="sr-only">Toggle sidebar</span>
+
+					<span class="icon-bar"></span>
+
+					<span class="icon-bar"></span>
+
+					<span class="icon-bar"></span>
+				</button>
+
+				<div class="navbar-header pull-left">
+					<a href="/views/index.html" class="navbar-brand">
+						<small>
+							<i class="fa fa-leaf"></i>
+							学生发展数据综合评价与分析系统
+						</small>
+					</a>
+				</div>
+
+				<div class="navbar-buttons navbar-header pull-right" role="navigation">
+					<ul class="nav ace-nav">
+
+						<li class="light-blue dropdown-modal">
+							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+
+								<img class="nav-user-photo us_photo" src="/assets/images/avatars/blank.jpg" alt="个人头像" style="background-color:#fff" />
+
+								<span class="user-info">
+							       <span id="us_name"></span>
+								</span>
+
+								<i class="ace-icon fa fa-caret-down"></i>
+							</a>
+
+							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+								<li>
+									<a id="setting" target="_blank">
+										<i class="ace-icon fa fa-cog"></i> 设置
+									</a>
+								</li>
+
+								<li>
+									<a id="profile" target="_blank">
+										<i class="ace-icon fa fa-user"></i> 个人信息
+									</a>
+								</li>
+
+								<li class="divider"></li>
+
+								<li>
+									<a href="/login.html" onclick="logout()">
+										<i class="ace-icon fa fa-power-off"></i> 注销
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- /.navbar-container -->
+		</div>
+
+		<div class="main-container ace-save-state" id="main-container">
+			<script type="text/javascript">
+				try {
+					ace.settings.loadState('main-container')
+				} catch(e) {}
+			</script>
+
+			<div id="sidebar" class="sidebar                  responsive                    ace-save-state">
+				<script type="text/javascript">
+					try {
+						ace.settings.loadState('sidebar')
+					} catch(e) {}
+				</script>
+
+				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+						<button class="btn btn-success">
+							<i class="ace-icon fa fa-signal"></i>
+						</button>
+
+						<button class="btn btn-info">
+							<i class="ace-icon fa fa-pencil"></i>
+						</button>
+
+						<button class="btn btn-warning">
+							<i class="ace-icon fa fa-users"></i>
+						</button>
+
+						<button class="btn btn-danger">
+							<i class="ace-icon fa fa-cogs"></i>
+						</button>
+					</div>
+
+					<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+						<span class="btn btn-success"></span>
+
+						<span class="btn btn-info"></span>
+
+						<span class="btn btn-warning"></span>
+
+						<span class="btn btn-danger"></span>
+					</div>
+				</div>
+				<!-- /.sidebar-shortcuts -->
+
+				<ul class="nav nav-list">
+					<li class="">
+						<a href="/views/index.html">
+							<i class="menu-icon fa fa-tachometer"></i>
+							<span class="menu-text"> 我的首页 </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-tasks"></i>
+							<span class="menu-text"> 数据管理 </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+
+							<li class="">
+								<a href="/views/dataManage/studentManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 学生
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/teacherManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 教师
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/majorManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 专业
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/classroomManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 班级
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/scoreManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 成绩
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/certificateManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 证书
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/competitionManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 竞赛
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/innovationTrainManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 创新训练
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/scholarshipManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 奖学金
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/excellentStudentManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 优秀学生
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/pushExcellentManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 推优
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/partyMemberManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 入党
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/postGraduateManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 考研录取
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/volunteerManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 志愿服务
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/dutyManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 学生干部
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/adviceManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 发展建议
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+						</ul>
+					</li>
+
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-bar-chart-o"></i>
+							<span class="menu-text"> 数据分析 </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="">
+								<a href="#" class="dropdown-toggle">
+									<i class="menu-icon fa fa-caret-right"></i> 个人情况分析
+									<b class="arrow fa fa-angle-down"></b>
+								</a>
+
+								<b class="arrow"></b>
+
+								<ul class="submenu">
+									<li class="">
+										<a href="/views/dataAnalysis/student/personalGrade.html">
+											<i class="menu-icon fa fa-leaf green"></i>个人成绩查询
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+									<li class="">
+										<a href="/views/dataAnalysis/student/personalAllInfo.html">
+											<i class="menu-icon fa fa-leaf green"></i>发展综合分析
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+
+								</ul>
+							</li>
+
+							<li class="">
+								<a href="/views/dataAnalysis/dorm/dormAtmosphere.html">
+									<i class="menu-icon fa fa-caret-right"></i> 宿舍情况分析
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="/views/dataAnalysis/classroom/classAtmosphere.html">
+									<i class="menu-icon fa fa-caret-right"></i> 班级情况分析
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="#" class="dropdown-toggle">
+									<i class="menu-icon fa fa-caret-right"></i> 整体学业分析
+									<b class="arrow fa fa-angle-down"></b>
+								</a>
+
+								<b class="arrow"></b>
+
+								<ul class="submenu">
+									<li class="">
+										<a href="/views/dataAnalysis/all/allGrade.html">
+											<i class="menu-icon fa fa-leaf green"></i>学分积欠情况分析
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+									<li class="">
+										<a href="/views/dataAnalysis/all/make_up_rebuild.html">
+											<i class="menu-icon fa fa-leaf green"></i>补考重修情况分析
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+
+								</ul>
+							</li>
+
+						</ul>
+					</li>
+
+					<li class="active open">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-book"></i>
+							<span class="menu-text"> 数据预测 </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="">
+								<a href="/views/bigDataAnalysis/courseDependence.html">
+									<i class="menu-icon fa fa-caret-right"></i> 课程通过预警
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="/views/bigDataAnalysis/scorePosition.html">
+									<i class="menu-icon fa fa-caret-right"></i> 成绩位置预测
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="active">
+								<a href="/views/bigDataAnalysis/postGraduate.html">
+									<i class="menu-icon fa fa-caret-right"></i> 考研录取预测
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="/views/bigDataAnalysis/partyMember.html">
+									<i class="menu-icon fa fa-caret-right"></i> 入党情况预测
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+						</ul>
+					</li>
+
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-folder-open-o"></i>
+							<span class="menu-text"> 文件操作 </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="">
+								<a href="/views/file/fileUpload.html">
+									<i class="menu-icon fa fa-caret-right"></i> 文件上传
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/file/fileDownload.html">
+									<i class="menu-icon fa fa-caret-right"></i> 文件下载
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+						</ul>
+					</li>
+
+				</ul>
+				<!-- /.nav-list -->
+				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+					<i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+				</div>
+			</div>
+
+			<div class="main-content">
+				<div class="main-content-inner">
+					<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+						<ul class="breadcrumb">
+							<li>
+								<i class="ace-icon fa fa-home home-icon"></i>
+								<a href="/views/index.html">首页</a>
+							</li>
+
+							<li class="active">考研录取预测</li>
+						</ul>
+						<!-- /.breadcrumb -->
+
+					</div>
+
+					<div class="page-content">
+
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+								<div class="row">
+									<div class="col-sm-10">
+										<h3 class="header blue lighter smaller">
+											<i class="ace-icon fa fa-spinner"></i>
+											考研录取预测
+										</h3>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-2">
+										<center>
+											<label for="st_grade">选择年级 : </label>
+											<select name="st_grade" id="st_grade" style="width: 120px;margin-left: 5px;">
+												<!--<option selected="selected" value=""></option>
+												<option value="2014">2014</option>
+												<option value="2015">2015</option>
+												<option value="2016">2016</option>
+												<option value="2017">2017</option>
+												<option value="2018">2018</option>
+												<option value="2019"></option>-->
+											</select>
+										</center>
+									</div>
+									<div class="col-sm-2">
+										<center>
+											<label for="st_major">选择专业 : </label>
+
+											<select name="st_major" id="st_major" style="width: 120px;margin-left: 5px;">
+												<!--<option selected="selected" value=""></option>
+												<option value="2014">计算机嵌入式</option>
+												<option value="2015">2015</option>
+												<option value="2016">2016</option>
+												<option value="2017">2017</option>
+												<option value="2018">2018</option>-->
+											</select>
+										</center>
+									</div>
+
+									<div class="col-sm-2">
+										<center>
+											<label for="st_class">选择班级 : </label>
+
+											<select name="st_class" id="st_class" style="width: 120px;margin-left: 5px;">
+												<!--<option selected="selected" value=""></option>
+												<option value="2014">嵌入式1511</option>
+												<option value="2015">2015</option>
+												<option value="2016">2016</option>
+												<option value="2017">2017</option>
+												<option value="2018">2018</option>-->
+											</select>
+										</center>
+									</div>
+
+									<div class="col-sm-2">
+										<center>
+											<label for="st_name">选择姓名 : </label>
+
+											<select name="st_name" id="st_name" style="width: 120px;margin-left: 5px;">
+											</select>
+										</center>
+
+									</div>
+									<div class="col-sm-2">
+										<center>
+											<button id="query" class="btn btn-info btn-sm">
+										<span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
+									&nbsp;查&nbsp;找&nbsp;
+									  </button>
+										</center>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-sm-10">
+										<h3 class="header blue lighter smaller">
+										</h3>
+									</div>
+								</div>
+
+								<div class="row">
+									<!--考验预测柱状图-->
+									<div class="col-sm-6">
+										<div class="widget-box transparent">
+											<div class="widget-header widget-header-flat">
+												<h4 class="widget-title lighter">
+													<i class="ace-icon fa fa-star orange"></i>
+													考研预测概率图
+												</h4>
+
+												<div class="widget-toolbar">
+													<a href="#" data-action="collapse">
+														<i class="ace-icon fa fa-chevron-up"></i>
+													</a>
+												</div>
+											</div>
+
+											<div class="widget-body">
+												<div class="widget-main no-padding">
+													<!--考研录取概率图-->
+													<div id="e_post_graduate" style="height:400px;margin-top: 25px;"></div>
+												</div>
+												<!-- /.widget-main -->
+											</div>
+											<!-- /.widget-body -->
+										</div>
+										<!-- /.widget-box -->
+									</div>
+									<!-- /.col -->
+
+									<!--必修课未通过情况-->
+									<div class="col-sm-6">
+										<div class="widget-box transparent">
+											<div class="widget-header widget-header-flat">
+												<h4 class="widget-title lighter">
+													<i class="ace-icon fa fa-star orange"></i>
+													发展建议
+												</h4>
+
+												<div class="widget-toolbar">
+													<a href="#" data-action="collapse">
+														<i class="ace-icon fa fa-chevron-up"></i>
+													</a>
+												</div>
+											</div>
+
+											<div class="widget-body">
+												<div class="widget-main no-padding">
+													<table class="table table-bordered table-striped table-hover tablesorter tablesorter-blue" style="margin-top: 25px;" id="post_graduate">
+														<thead class="thin-border-bottom" style="visibility: hidden;" id="post_graduate_title">
+															<tr>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="4">序号</font>
+																</th>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="4">院校种类</font>
+																</th>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="4">置信度</font>
+																</th>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="4">建议</font>
+																</th>
+
+															</tr>
+														</thead>
+														<tbody id="post_graduate_tbody">
+
+														</tbody>
+													</table>
+												</div>
+												<!-- /.widget-main -->
+											</div>
+											<!-- /.widget-body -->
+										</div>
+										<!-- /.widget-box -->
+									</div>
+
+								</div>
+								<!-- /.row -->
+
+							</div>
+
+							<!-- PAGE CONTENT ENDS -->
+
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /.page-content -->
+				</div>
+			</div>
+			<!-- /.main-content -->
+
+			<div class="footer ">
+				<div class="footer-inner ">
+					<div class="footer-content ">
+						<span class="bigger-120 ">
+							<span class="blue bolder " style="margin-right: 10px; ">学生发展数据综合评价与分析系统</span> 苏州科技大学 &copy; 2018-2019
+						</span>
+
+					</div>
+				</div>
+			</div>
+
+			<a href="# " id="btn-scroll-up " class="btn-scroll-up btn btn-sm btn-inverse ">
+				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110 "></i>
+			</a>
+		</div>
+		<!-- /.main-container -->
+
+		<!-- basic scripts -->
+
+		<!--[if !IE]> -->
+		<script src="/assets/js/jquery-2.1.4.min.js "></script>
+		<script src="/assets/js/jquery.form.js "></script>
+		<script src="/assets/js/jquery.cookie.js "></script>
+		<script src="/assets/js/sddb.util.js "></script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script src="/assets/js/jquery-1.11.3.min.js "></script>
+<![endif]-->
+		<script type="text/javascript ">
+			if('ontouchstart' in document.documentElement) document.write("<script src='/assets/js/jquery.mobile.custom.min.js'>" + " <
+					" + " / script > ");
+		</script>
+		<script src="/assets/js/bootstrap.min.js"></script>
+
+		<!-- page specific plugin scripts -->
+		<script src="/assets/js/jquery-ui.min.js"></script>
+		<script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
+
+		<!-- ace scripts -->
+		<script src="/assets/js/ace-elements.min.js"></script>
+		<script src="/assets/js/ace.min.js"></script>
+
+		<!-- inline scripts related to this page -->
+
+		<!-- ECharts单文件引入 -->
+		<!-- 标签式单文件引入 -->
+		<script src="/assets/js/echarts-all.js"></script>
+		<script src="/assets/js/jquery-2.1.4.min.js"></script>
+
+		<!--选择学生-->
+		<script type="text/javascript">
+			//总体数据
+			var arrayGrade = [];
+
+			//判断数组中是否存在此数
+			function isExist(array, n) {
+				for(var i = 0; i < array.length; i++) {
+					if(array[i] == n) {
+						return true;
+					}
+				}
+				return false;
+
+			}
+			//先得到年级
+			function getGrade(arrayGrade) {
+
+				var grade = [" "];
+				for(var i = 0; i < arrayGrade.length; i++) {
+					//先判断grade中是否存在该数字
+					var grade_item = arrayGrade[i].cl_grade;
+					if(!isExist(grade, grade_item)) {
+						grade.push(grade_item);
+					}
+				}
+				//遍历grade数组，将值填入进年级下拉框中
+				var sel_grade = document.getElementById("st_grade");
+				for(var j = 0; j < grade.length; j++) {
+					var temp = grade[j];
+					sel_grade.options[j] = new Option(temp, temp);
+				}
+			}
+
+			//st_grade的改变事件
+			$("#st_grade").change(function() {
+				var major = [" "];
+				var grade = $("#st_grade option:selected").val();
+
+				//取出指定年级的不重复的专业
+				for(var i = 0; i < arrayGrade.length; i++) {
+					var temp_grade = arrayGrade[i].cl_grade;
+					var temp_major = arrayGrade[i].cl_major;
+
+					if((temp_grade == grade) && (!isExist(major, temp_major))) {
+						major.push(temp_major);
+					}
+				}
+
+				var sel_major = document.getElementById("st_major");
+				//清空之前的专业下拉框与班级下拉框、学生姓名下拉框
+				$("#st_major").empty();
+				$("#st_class").empty();
+				$("#st_name").empty();
+
+				for(var j = 0; j < major.length; j++) {
+					sel_major.options[j] = new Option(major[j], major[j]);
+				}
+			});
+
+			//st_major的改变事件
+
+			$("#st_major").change(function() {
+
+				var sclass = [" "];
+				var grade = $("#st_grade option:selected").val();
+				var major = $("#st_major option:selected").val();
+
+				//取出指定年级、专业的班级
+				for(var i = 0; i < arrayGrade.length; i++) {
+					var temp_grade = arrayGrade[i].cl_grade;
+					var temp_major = arrayGrade[i].cl_major;
+					if((temp_grade == grade) && (temp_major == major)) {
+						sclass.push(arrayGrade[i].cl_name);
+					}
+				}
+
+				///清空之前的班级下拉框
+				$("#st_class").empty();
+				$("#st_name").empty();
+
+				var sel_class = document.getElementById("st_class");
+				for(var j = 0; j < sclass.length; j++) {
+					sel_class.options[j] = new Option(sclass[j], sclass[j]);
+				}
+			})
+
+			//st_class的改变事件，需要使用ajax来获取班级学生
+			$("#st_class").change(function() {
+				//清空学生
+				$("#st_name").empty();
+				var sclass = $("#st_class option:selected").val();
+				if(sclass == " ") {
+					return;
+				}
+				//使用ajax来获取学生
+				$.ajax({
+					type: "post",
+					url: "/student/findStuByClass.do",
+					dataType: 'json',
+					data: {
+						st_class: sclass
+					},
+					success: function(data) {
+						var stu = document.getElementById("st_name");
+						for(var i = 0; i < data.length; i++) {
+							stu.options[i] = new Option(data[i].st_name, data[i].st_id);
+						}
+					},
+					error: function(err) {
+						alert("获取学生发生错误！");
+					}
+				});
+			})
+
+			$(function() {
+				//ajax请求获取班级
+				$.ajax({
+					type: "post",
+					url: "/score/getClassroom.do",
+					dataType: "json",
+					data: {},
+					success: function(data) {
+						arrayGrade = data;
+						getGrade(data);
+
+					},
+					error: function() {
+						alert("获取班级信息失败!");
+					}
+				});
+			})
+		</script>
+
+		<!--概率图的配置-->
+		<script>
+			function getPostGraduate(xdata, value) {
+				// 基于准备好的dom，初始化echarts实例
+				var myChart = echarts.init(document.getElementById('e_post_graduate'));
+
+				// 指定图表的配置项和数据
+				var option = {
+					tooltip: {
+						show: true
+					},
+					legend: {
+						data: ['置信度']
+					},
+					xAxis: [{
+						type: 'category',
+						data: xdata
+					}],
+					yAxis: [{
+						type: 'value',
+						max: 1.2
+					}],
+					series: [{
+						name: "置信度",
+						type: "bar",
+						data: value,
+						barWidth: 60,
+						itemStyle: {
+							normal: {
+								label: {
+									show: true, //开启显示
+									position: 'top', //在上方显示
+									textStyle: { //数值样式
+										color: 'black',
+										fontSize: 16
+									}
+								}
+							}
+						},
+					}]
+				};
+
+				// 使用刚指定的配置项和数据显示图表。
+				myChart.setOption(option);
+
+				//图表大小自适应
+				window.addEventListener("resize", function() {
+					myChart.resize();
+				});
+			}
+		</script>
+
+		<script>
+			$("#query").click(function() {
+				if($("#st_name").val() == null) {
+					alert("请先选择学生!");
+					return;
+				}
+
+				getBPostGraduate();
+
+			});
+		</script>
+
+		<script>
+			function getBPostGraduate() {
+				$.ajax({
+					type: "get",
+					url: "/forecast/getBPostGraduateOrPartyMember",
+					dataType: "json",
+					data: {
+						"st_id": $("#st_name").val()
+					},
+					success: function(data) {
+
+						var all_xdata = new Array();
+						var all_value = new Array();
+						var all_data = new Array();
+
+						var x1 = getRemote1(data.gpa, data.scholarship, data.competition);
+						all_xdata = all_xdata.concat(x1.xdata);
+						all_value = all_value.concat(x1.yvalue);
+						all_data = all_data.concat(x1.all_data);
+
+						var x2 = getRemote2(data.gpa, data.scholarship, data.competition);
+						all_xdata = all_xdata.concat(x2.xdata);
+						all_value = all_value.concat(x2.yvalue);
+						all_data = all_data.concat(x2.all_data);
+
+						if(all_xdata == "") {
+							alert("该生数据较少，无法预测!");
+							return;
+						}
+
+						getPostGraduate(all_xdata, all_value);
+						getAdvice(all_data);
+
+					},
+					error: function(err) {
+						alert("获取学生数据失败!");
+					}
+				});
+			}
+		</script>
+
+		<!--普通院校-->
+		<script>
+			function getRemote1(gpa, scholarship, competition) {
+				var xdata = new Array();
+				var yvalue = new Array();
+				var all_data = new Array();
+				$.ajax({
+					type: "post",
+					url: "http://tencent.chenxiaoxiong.top:8080/getAsRules",
+					dataType: "json",
+					crossDomain: true,
+					async: false,
+					data: {
+						"antecedentInput": gpa + "," + scholarship + competition,
+						"consequentInput": "普通院校",
+						"similarityRatio": 0.1,
+						"type": "KY_GPA"
+					},
+					success: function(data) {
+						all_data = data;
+						for(var i = 0; i < data.length; i++) {
+							xdata[i] = data[i].consequent;
+							yvalue[i] = data[i].confidence.toFixed(3);
+						}
+					},
+					error: function(err) {
+						alert("获取远程预测结果失败!");
+					}
+				});
+				return {
+					xdata: xdata,
+					yvalue: yvalue,
+					all_data: all_data
+				}
+			}
+		</script>
+
+		<!--名校-->
+		<script>
+			function getRemote2(gpa, scholarship, competition) {
+				var xdata = new Array();
+				var yvalue = new Array();
+				var all_data = new Array();
+				$.ajax({
+					type: "post",
+					url: "http://tencent.chenxiaoxiong.top:8080/getAsRules",
+					dataType: "json",
+					crossDomain: true,
+					async: false,
+					data: {
+						"antecedentInput": gpa + "," + scholarship + competition,
+						"consequentInput": "名校",
+						"similarityRatio": 0.1,
+						"type": "KY_GPA"
+					},
+					success: function(data) {
+						all_data = data;
+						for(var i = 0; i < data.length; i++) {
+							xdata[i] = data[i].consequent;
+							yvalue[i] = data[i].confidence.toFixed(3);
+						}
+					},
+					error: function(err) {
+						alert("获取远程预测结果失败!");
+					}
+				});
+				return {
+					xdata: xdata,
+					yvalue: yvalue,
+					all_data: all_data
+				}
+			}
+		</script>
+
+		<script>
+			function getAdvice(data) {
+				//清空之前的行
+				$("#post_graduate tbody").html("");
+
+				var table = document.getElementById("post_graduate");
+				var t_body = document.getElementById("post_graduate_tbody");
+				for(var i = 0; i < data.length; i++) {
+					var t_tr = document.createElement("tr");
+					var td_num = document.createElement("td");
+					var td_category = document.createElement("td");
+					var td_confidence = document.createElement("td");
+					var td_advice = document.createElement("td");
+
+					td_num.innerHTML = "<font size='3' color='#000000'>" + (i + 1) + "</font>";
+					td_category.innerHTML = "<font size='3' color='#000000'>" + data[i].consequent + "</font>";
+					td_confidence.innerHTML = "<font size='3' color='#000000'>" + data[i].confidence.toFixed(3) + "</font>";
+					var advice = data[i].antecedent;
+					for(var j = 0; j < advice.length; j++) {
+						if(advice[j].indexOf("A") == -1) {
+							if(advice[j].indexOf("B") == -1) {
+								if(advice[j].indexOf("C") == -1) {
+									td_advice.innerHTML += "<font size='3' color='#000000'>" + "获得" + advice[j] + "<br>" + "</font>";
+								} else {
+									td_advice.innerHTML += "<font size='3' color='#000000'>" + "提升绩点至1.5左右" + "<br>" + "</font>";
+								}
+							} else {
+								td_advice.innerHTML += "<font size='3' color='#000000'>" + "提升绩点至2.5左右" + "<br>" + "</font>";
+							}
+						} else {
+							td_advice.innerHTML += "<font size='3' color='#000000'>" + "提升绩点至3.5左右" + "<br>" + "</font>";
+						}
+					}
+
+					t_tr.appendChild(td_num);
+					t_tr.appendChild(td_category);
+					t_tr.appendChild(td_confidence);
+					t_tr.appendChild(td_advice);
+					t_body.appendChild(t_tr);
+				}
+				table.appendChild(t_body);
+
+				document.getElementById("post_graduate_title").style.visibility = "visible";
+			}
+		</script>
+
+	</body>
+
+</html>

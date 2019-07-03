@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 此配置文件解决t_party_member表的基本增删改查  -->
+<mapper namespace="edu.usts.sddb.dao.PartyMemberDao">
+
+    <select id="findAll" resultType="edu.usts.sddb.entity.PartyMember">
+		select * from t_party_member
+	</select>
+
+    <select id="findByName" parameterType="String" resultType="edu.usts.sddb.entity.PartyMember">
+		select * from t_party_member where pa_student_name =#{pa_student_name}
+	</select>
+
+    <select id="findByPage" resultType="edu.usts.sddb.entity.PartyMember">
+		select * from
+		t_party_member
+		order by pa_id desc
+		limit #{0},#{1}
+	</select>
+
+    <select id="getSum" resultType="int">
+		select count(*) from
+		t_party_member
+	</select>
+
+    <select id="findByFiltersSum" resultType="int" parameterType="string">
+		${_parameter}
+	</select>
+
+    <select id="findByFilters" parameterType="string" resultType="edu.usts.sddb.entity.PartyMember">
+		${_parameter}
+	</select>
+
+    <insert id="add" parameterType="edu.usts.sddb.entity.PartyMember">
+		insert into t_party_member(pa_student_id,pa_student_name,pa_branch_name,
+		pa_student_sex,pa_time,pa_state,pa_grade,pa_class_name,pa_branch_secretary)
+		values (#{pa_student_id},#{pa_student_name},#{pa_branch_name},#{pa_student_sex},
+		#{pa_time},#{pa_state},#{pa_grade},#{pa_class_name},#{pa_branch_secretary})
+	</insert>
+
+    <delete id="del" parameterType="string">
+		delete from t_party_member where pa_id = #{pa_id}
+	</delete>
+
+
+    <update id="edit" parameterType="edu.usts.sddb.entity.PartyMember">
+		update t_party_member set
+		pa_student_id=#{pa_student_id},pa_student_name=#{pa_student_name},pa_branch_name=#{pa_branch_name},
+		pa_student_sex=#{pa_student_sex},pa_time=#{pa_time},pa_state=#{pa_state},
+		pa_grade=#{pa_grade},pa_class_name=#{pa_class_name},pa_branch_secretary=#{pa_branch_secretary}
+		where
+		pa_id=#{pa_id}
+	</update>
+
+
+    <!--返回表中注释-->
+    <select id="findComment" resultType="edu.usts.sddb.entity.assist.DBComment">
+		show full fields from t_party_member
+	</select>
+</mapper>

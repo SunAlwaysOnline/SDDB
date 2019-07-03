@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 此配置文件解决t_teacher表的基本增删改查 -->
+<mapper namespace="edu.usts.sddb.dao.TeacherDao">
+
+    <select id="findAll" resultType="edu.usts.sddb.entity.Teacher">
+		select * from t_teacher
+	</select>
+
+    <select id="findById" parameterType="string" resultType="edu.usts.sddb.entity.Teacher">
+		select * from t_teacher where te_id = #{id}
+	</select>
+
+    <!-- 第一个参数为页数，第二个参数为每页多少行 -->
+    <select id="findByPage" resultType="edu.usts.sddb.entity.Teacher">
+		select * from
+		t_teacher
+		order by te_id desc
+		limit #{0},#{1}
+	</select>
+
+    <select id="getSum" resultType="int">
+		select count(*) from
+		t_teacher
+	</select>
+
+
+    <!-- 最基本的增加、修改、删除在下面完成 -->
+
+    <!-- 增加一条教师 数据 -->
+    <insert id="add" parameterType="edu.usts.sddb.entity.Teacher">
+		replace into t_teacher
+		(te_id,te_name,te_sex,te_birth,te_department,te_phone,te_email,te_edu_background,te_edu_degree,te_pro_title,te_politics_status)
+		values(#{te_id},#{te_name},#{te_sex},#{te_birth},
+		#{te_department},#{te_phone},#{te_email},#{te_edu_background},
+		#{te_edu_degree},#{te_pro_title},#{te_politics_status})
+	</insert>
+
+    <!-- 按学号删除教师 -->
+    <delete id="del" parameterType="string">
+		delete from t_teacher
+		where te_id=#{te_id}
+	</delete>
+
+    <update id="edit" parameterType="edu.usts.sddb.entity.Teacher">
+		update t_teacher set
+		te_name=#{te_name},te_sex=#{te_sex},te_birth=#{te_birth},
+		te_department=#{te_department},te_phone=#{te_phone},te_email=#{te_email},
+		te_edu_background=#{te_edu_background},te_edu_degree=#{te_edu_degree},
+		te_pro_title=#{te_pro_title},te_politics_status=#{te_politics_status}
+		where
+		te_id=#{te_id}
+	</update>
+
+    <!-- 按照filter的复杂条件查找 -->
+    <select id="findByFilters" parameterType="string"
+            resultType="edu.usts.sddb.entity.Teacher">
+		${_parameter}
+	</select>
+
+    <!-- 按照filter的复杂条件查找 -->
+    <select id="findByFiltersSum" parameterType="string"
+            resultType="int">
+		${_parameter}
+	</select>
+
+    <!--返回表中注释-->
+    <select id="findComment" resultType="edu.usts.sddb.entity.assist.DBComment">
+		show full fields from t_teacher
+	</select>
+</mapper>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta charset="utf-8" />
+		<title>添加留言</title>
+
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+		<!-- bootstrap & fontawesome -->
+		<link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+
+		<!-- page specific plugin styles -->
+		<link rel="stylesheet" href="/assets/css/jquery-ui.min.css" />
+
+		<!-- text fonts -->
+		<link rel="stylesheet" href="/assets/css/fonts.googleapis.com.css" />
+
+		<!-- ace styles -->
+		<link rel="stylesheet" href="/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+
+		<!--[if lte IE 9]>
+			<link rel="stylesheet" href="/assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
+		<![endif]-->
+		<link rel="stylesheet" href="/assets/css/ace-skins.min.css" />
+		<link rel="stylesheet" href="/assets/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="/assets/css/select2.min.css" media="screen" />
+
+		<!--[if lte IE 9]>
+		  <link rel="stylesheet" href="/assets/css/ace-ie.min.css" />
+		<![endif]-->
+
+		<!-- inline styles related to this page -->
+
+		<!-- ace settings handler -->
+		<script src="/assets/js/ace-extra.min.js"></script>
+
+		<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+
+		<!--[if lte IE 8]>
+		<script src="/assets/js/html5shiv.min.js"></script>
+		<script src="/assets/js/respond.min.js"></script>
+		<![endif]-->
+	</head>
+
+	<body class="no-skin">
+		<div id="navbar" class="navbar navbar-default          ace-save-state">
+			<div class="navbar-container ace-save-state" id="navbar-container">
+				<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+					<span class="sr-only">Toggle sidebar</span>
+
+					<span class="icon-bar"></span>
+
+					<span class="icon-bar"></span>
+
+					<span class="icon-bar"></span>
+				</button>
+
+				<div class="navbar-header pull-left">
+					<a href="/views/index.html" class="navbar-brand">
+						<small>
+							<i class="fa fa-leaf"></i>
+							学生发展数据综合评价与分析系统
+						</small>
+					</a>
+				</div>
+				<div class="navbar-buttons navbar-header pull-right" role="navigation">
+					<ul class="nav ace-nav">
+
+						<li class="light-blue dropdown-modal">
+							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+
+								<img class="nav-user-photo us_photo" src="/assets/images/avatars/blank.jpg" alt="个人头像" style="background-color:#fff" />
+
+								<span class="user-info">
+							       <span id="us_name"></span>
+								</span>
+
+								<i class="ace-icon fa fa-caret-down"></i>
+							</a>
+
+							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+								<li>
+									<a id="setting" target="_blank">
+										<i class="ace-icon fa fa-cog"></i> 设置
+									</a>
+								</li>
+
+								<li>
+									<a id="profile" target="_blank">
+										<i class="ace-icon fa fa-user"></i> 个人信息
+									</a>
+								</li>
+
+								<li class="divider"></li>
+
+								<li>
+									<a href="/login.html" onclick="logout()">
+										<i class="ace-icon fa fa-power-off"></i> 注销
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- /.navbar-container -->
+		</div>
+
+		<div class="main-container ace-save-state" id="main-container">
+			<script type="text/javascript">
+				try {
+					ace.settings.loadState('main-container')
+				} catch(e) {}
+			</script>
+
+			<div id="sidebar" class="sidebar                  responsive                    ace-save-state">
+				<script type="text/javascript">
+					try {
+						ace.settings.loadState('sidebar')
+					} catch(e) {}
+				</script>
+
+				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+						<button class="btn btn-success">
+							<i class="ace-icon fa fa-signal"></i>
+						</button>
+
+						<button class="btn btn-info">
+							<i class="ace-icon fa fa-pencil"></i>
+						</button>
+
+						<button class="btn btn-warning">
+							<i class="ace-icon fa fa-users"></i>
+						</button>
+
+						<button class="btn btn-danger">
+							<i class="ace-icon fa fa-cogs"></i>
+						</button>
+					</div>
+
+					<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+						<span class="btn btn-success"></span>
+
+						<span class="btn btn-info"></span>
+
+						<span class="btn btn-warning"></span>
+
+						<span class="btn btn-danger"></span>
+					</div>
+				</div>
+				<!-- /.sidebar-shortcuts -->
+
+				<ul class="nav nav-list">
+					<li class="active">
+						<a href="/views/index.html">
+							<i class="menu-icon fa fa-tachometer"></i>
+							<span class="menu-text"> 我的首页 </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+
+				</ul>
+				<!-- /.nav-list -->
+				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+					<i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+				</div>
+			</div>
+
+			<div class="main-content">
+				<div class="main-content-inner">
+					<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+						<ul class="breadcrumb">
+							<li>
+								<i class="ace-icon fa fa-home home-icon"></i>
+								<a href="/views/index.html">首页</a>
+							</li>
+
+							<li class="active">添加留言</li>
+						</ul>
+						<!-- /.breadcrumb -->
+
+					</div>
+
+					<div class="page-content">
+
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+								<div class="row">
+									<div class="col-sm-10">
+										<h3 class="header blue lighter smaller">
+											<i class="ace-icon fa fa-spinner"></i>
+											添加留言
+										</h3>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-5">
+
+										<label for="le_target_id" style="margin-left: 30px;font-size: 16px;">选择留言对象 : </label>
+										<select name="le_target_id" id="le_target_id" style="margin-left: 5px;" class="select2">
+											<!--<option selected="selected" value=""></option>
+												<option value="学号或工号">姓名(学号:;工号:)</option>
+												!-->
+										</select>
+
+									</div>
+
+								</div>
+
+								<div class="row">
+									<div class="col-sm-10">
+										<h3 class="header blue lighter smaller">
+										</h3>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-sm-10">
+										<label for="le_content" style="margin-left: 30px;font-size: 16px;">留言内容 : </label>
+
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-sm-10">
+										<textarea id="le_content" style="margin-left: 30px;margin-top:10px;width:550px;height:150px;overflow-y:scroll;resize: none;font-size:16px;"></textarea>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-sm-10">
+										<h3 class="header blue lighter smaller">
+										</h3>
+									</div>
+								</div>
+
+								<button class="btn btn-sm btn-info btn-white btn-round" id="leave" style="margin-left: 240px;">
+										<i class="ace-icon fa fa-globe bigger-150"></i>
+                                         	<span style="font-size: 16px;">确定</span>
+										<i class="ace-icon fa fa-arrow-right icon-on-right bigger-150"></i>
+								</button>
+
+							</div>
+
+							<script src="/assets/js/jquery-2.1.4.min.js"></script>
+
+							<!-- PAGE CONTENT ENDS -->
+
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /.page-content -->
+				</div>
+			</div>
+			<!-- /.main-content -->
+
+			<div class="footer">
+				<div class="footer-inner">
+					<div class="footer-content">
+						<span class="bigger-120">
+							<span class="blue bolder" style="margin-right: 10px;">学生发展数据综合评价与分析系统</span> 苏州科技大学 &copy; 2018-2019
+						</span>
+
+					</div>
+				</div>
+			</div>
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+			</a>
+		</div>
+		<!-- /.main-container -->
+
+		<!-- basic scripts -->
+
+		<!--[if !IE]> -->
+		<script src="/assets/js/jquery-2.1.4.min.js"></script>
+		<script src="/assets/js/jquery.form.js"></script>
+		<script src="/assets/js/jquery.cookie.js"></script>
+		<script src="/assets/js/select2.min.js"></script>
+		<script src="/assets/js/sddb.util.js"></script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script src="/assets/js/jquery-1.11.3.min.js"></script>
+<![endif]-->
+		<script type="text/javascript">
+			if('ontouchstart' in document.documentElement) document.write("<script src='/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+		</script>
+		<script src="/assets/js/bootstrap.min.js"></script>
+
+		<!-- page specific plugin scripts -->
+		<script src="/assets/js/jquery-ui.min.js"></script>
+		<script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
+
+		<!-- ace scripts -->
+		<script src="/assets/js/ace-elements.min.js"></script>
+		<script src="/assets/js/ace.min.js"></script>
+
+		<!-- inline scripts related to this page -->
+
+		<!--选择留言目标对象-->
+		<script type="text/javascript">
+			$(function() {
+				//ajax请求获取班级
+				$.ajax({
+					type: "post",
+					url: "/leaveMessage/getTarget",
+					dataType: "json",
+					data: {},
+					success: function(data) {
+						$("#le_target_id").empty();
+						var le_target_id = document.getElementById("le_target_id");
+						le_target_id.options[0] = new Option("", "");
+						for(var i = 0; i < data.length; i++) {
+							var dkey = data[i].us_id;
+							var dvalue = (data[i].us_type == "teacher") ? (data[i].us_name + " ( 工号:" + dkey + " )") : (data[i].us_name + "( 学号:" + dkey + " )");
+							le_target_id.options[i + 1] = new Option(dvalue, dkey);
+						}
+
+						//由个人主页中的发送消息跳转而来的
+						var st_id = window.location.href.split("=")[1];
+						if(st_id != null) {
+							$("#le_target_id").val(st_id);
+							if($("#le_target_id").val() == null) {
+								alert("该用户并未注册，无法发送消息!");
+							}
+						}
+
+						$("#le_target_id").select2();
+
+					},
+					error: function() {
+						alert("获取留言对象失败!");
+					}
+				});
+			});
+
+			//点击发表
+			$("#leave").click(function() {
+				var le_target_id = $("#le_target_id").val();
+				var le_content = $("#le_content").val();
+				if(le_content == "") {
+					alert("留言内容不得为空");
+					return;
+				};
+
+				//使用ajax来发表留言
+				$.ajax({
+					type: "post",
+					url: "/leaveMessage/leave",
+					dataType: 'json',
+					data: {
+						le_author_id: $.cookie("us_id"),
+						le_content: le_content,
+						le_target_id: le_target_id
+					},
+					success: function(data) {
+						if(data == true) {
+							//关闭当前页面，并刷新父页面
+							window.close();
+							window.opener.location.href = window.opener.location.href;
+						}
+					},
+					error: function(err) {
+						alert("留言发表失败...");
+					}
+				});
+			});
+		</script>
+
+	</body>
+
+</html>

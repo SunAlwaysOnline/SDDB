@@ -1,0 +1,87 @@
+{
+	"major": "通信工程",
+	"nodes": [
+		{
+			"color": "#c78419",
+			"label": "信号与系统A",
+			"attributes": "",
+			"id": "信号与系统A",
+			"size": 10
+		}, {
+			"color": "#3419c7",
+			"label": "程序设计基础",
+			"attributes": "",
+			"id": "程序设计基础",
+			"size": 10
+		}, {
+			"color": "#c79f19",
+			"label": "模拟电子技术",
+			"attributes": "",
+			"id": "模拟电子技术",
+			"size": 10
+		}, {
+			"color": "#c71969",
+			"label": "微处理器与接口技术",
+			"attributes": "",
+			"id": "微处理器与接口技术",
+			"size": 10
+		}, {
+			"color": "#1919c7",
+			"label": "数字电子技术",
+			"attributes": "",
+			"id": "数字电子技术",
+			"size": 10
+		}, {
+			"color": "#1919c7",
+			"label": "通信电子线路A",
+			"attributes": "",
+			"id": "通信电子线路A",
+			"size": 10
+		}, {
+			"color": "#1919c7",
+			"label": "通信原理A(一)",
+			"attributes": "",
+			"id": "通信原理A(一)",
+			"size": 10
+		}, {
+			"color": "#c73419",
+			"label": "电路分析",
+			"attributes": "",
+			"id": "电路分析",
+			"size": 10
+		}
+	],
+	"edges": [
+		{
+			"sourceID": "数字电子技术",
+			"attributes": "",
+			"targetID": "通信电子线路A",
+			"size": 1
+		}, {
+			"sourceID": "程序设计基础",
+			"attributes": "",
+			"targetID": "通信原理A(一)",
+			"size": 1
+		}, {
+			"sourceID": "信号与系统A",
+			"attributes": "",
+			"targetID": "通信电子线路A",
+			"size": 1
+		}, {
+			"sourceID": "微处理器与接口技术",
+			"attributes": "",
+			"targetID": "通信电子线路A",
+			"size": 1
+		}, {
+			"sourceID": "电路分析",
+			"attributes": "",
+			"targetID": "通信电子线路A",
+			"size": 1
+		}, {
+			"sourceID": "模拟电子技术",
+			"attributes": "",
+			"targetID": "通信电子线路A",
+			"size": 1
+		}
+	]
+}

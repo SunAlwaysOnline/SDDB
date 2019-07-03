@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 此配置文件解决t_excellent_student表的基本增删改查 -->
+<mapper namespace="edu.usts.sddb.dao.ExcellentStudentDao">
+
+    <select id="findAll" resultType="edu.usts.sddb.entity.ExcellentStudent">
+		select * from t_excellent_student order by ex_id asc
+	</select>
+
+    <select id="findById" parameterType="String"
+            resultType="edu.usts.sddb.entity.ExcellentStudent">
+		select * from t_excellent_student
+		where ex_student_id =#{id}
+	</select>
+
+    <select id="findByPage" resultType="edu.usts.sddb.entity.ExcellentStudent">
+		select * from
+		t_excellent_student
+		order by ex_id desc
+		limit #{0},#{1}
+	</select>
+
+    <select id="getSum" resultType="int">
+		select count(*) from
+		t_excellent_student
+	</select>
+
+    <select id="findByFiltersSum" resultType="int" parameterType="string">
+		${_parameter}
+	</select>
+
+    <select id="findByFilters" parameterType="string" resultType="edu.usts.sddb.entity.ExcellentStudent">
+		${_parameter}
+	</select>
+
+    <insert id="add" parameterType="edu.usts.sddb.entity.ExcellentStudent">
+		replace into t_excellent_student(ex_student_id,ex_student_name,ex_year,ex_honor)
+		values (#{ex_student_id},#{ex_student_name},#{ex_year},#{ex_honor})
+	</insert>
+
+    <delete id="del" parameterType="string">
+		delete from t_excellent_student where ex_id = #{ex_id}
+	</delete>
+
+
+    <update id="edit" parameterType="edu.usts.sddb.entity.ExcellentStudent">
+		update t_excellent_student set
+		ex_student_id=#{ex_student_id},ex_student_name=#{ex_student_name},
+		ex_year=#{ex_year},ex_honor=#{ex_honor}
+		where
+		ex_id=#{ex_id}
+	</update>
+
+    <!--返回表中注释-->
+    <select id="findComment" resultType="edu.usts.sddb.entity.assist.DBComment">
+		show full fields from t_duty
+	</select>
+
+</mapper>

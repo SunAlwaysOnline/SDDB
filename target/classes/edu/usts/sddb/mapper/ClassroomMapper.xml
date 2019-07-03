@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 此配置文件解决t_class表的基本增删改查 -->
+<mapper namespace="edu.usts.sddb.dao.ClassroomDao">
+
+    <!-- 返回班级表中的全部数据 -->
+    <select id="findAll" resultType="edu.usts.sddb.entity.Classroom">
+		select * from t_class
+		order by cl_id desc
+	</select>
+
+
+    <!-- 根据年级查出专业名 -->
+    <select id="findMajorByYear" parameterType="int" resultType="string">
+		select distinct cl_major from t_class where cl_grade=#{year}
+	</select>
+
+
+    <!-- 第一个参数为页数，第二个参数为每页多少行 -->
+    <select id="findByPage" resultType="edu.usts.sddb.entity.Classroom">
+		select * from
+		t_class order by cl_id desc
+		limit #{0},#{1}
+	</select>
+
+    <select id="getSum" resultType="int">
+		select count(*) from
+		t_class
+	</select>
+
+
+    <!-- 最基本的增加、修改、删除在下面完成 -->
+
+    <!-- 增加一条class数据 -->
+    <insert id="add" parameterType="edu.usts.sddb.entity.Classroom">
+		replace into t_class
+		(cl_id,cl_name,cl_person_num,cl_major_id,cl_edu_len,cl_grade,cl_instructor_name,cl_instructor_phone,cl_edu_form,cl_major)
+		values(#{cl_id},#{cl_name},#{cl_person_num},#{cl_major_id},
+		#{cl_edu_len},#{cl_grade},#{cl_instructor_name},#{cl_instructor_phone},
+		#{cl_edu_form},#{cl_major} )
+	</insert>
+
+    <!-- 按学号删除class -->
+    <delete id="del" parameterType="string">
+		delete from t_class
+		where cl_id=#{cl_id}
+	</delete>
+
+    <update id="edit" parameterType="edu.usts.sddb.entity.Classroom">
+		update t_class set
+		cl_name=#{cl_name},cl_person_num=#{cl_person_num},cl_major_id=#{cl_major_id},
+		cl_edu_len=#{cl_edu_len},cl_grade=#{cl_grade},cl_instructor_name=#{cl_instructor_name},
+		cl_instructor_phone=#{cl_instructor_phone},cl_edu_form=#{cl_edu_form},cl_major=#{cl_major}
+		where
+		cl_id=#{cl_id}
+	</update>
+
+    <!-- 按照filter的复杂条件查找 -->
+    <select id="findByFilters" parameterType="string"
+            resultType="edu.usts.sddb.entity.Classroom">
+		${_parameter}
+	</select>
+
+    <!-- 按照filter的复杂条件查找 -->
+    <select id="findByFiltersSum" parameterType="string"
+            resultType="int">
+		${_parameter}
+	</select>
+
+    <select id="findClassByGradeAndMajor" resultType="string">
+		select distinct cl_name  from t_class where cl_grade=#{0} and cl_major=#{1}
+	</select>
+
+    <!--返回表中注释-->
+    <select id="findComment" resultType="edu.usts.sddb.entity.assist.DBComment">
+		show full fields from t_class
+	</select>
+
+
+</mapper>

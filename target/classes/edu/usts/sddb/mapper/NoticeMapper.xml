@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 此配置文件解决notice表的基本增删改查 -->
+<mapper namespace="edu.usts.sddb.dao.NoticeDao">
+    <select id="findTopSome" parameterType="int" resultType="edu.usts.sddb.entity.Notice">
+        select * from t_notice order by no_create_time desc limit 0,#{number}
+    </select>
+
+    <select id="findOne" parameterType="int" resultType="edu.usts.sddb.entity.Notice">
+        select * from t_notice where no_id=#{no_id}
+    </select>
+
+    <insert id="addNotice" parameterType="edu.usts.sddb.entity.Notice">
+        insert into t_notice (no_user_id,no_title,no_content,no_attach)
+        values
+        (#{no_user_id},#{no_title},#{no_content},#{no_attach})
+    </insert>
+
+    <delete id="delNotice" parameterType="int">
+        delete from t_notice where no_id = #{no_id}
+    </delete>
+
+    <update id="updateNotice" parameterType="edu.usts.sddb.entity.Notice">
+        update t_notice set no_title=#{no_title},
+        no_content=#{no_content},no_attach=#{no_attach}
+        where
+        no_id = #{no_id}
+    </update>
+</mapper>

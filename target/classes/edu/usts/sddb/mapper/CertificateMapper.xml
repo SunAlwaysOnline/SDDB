@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 此配置文件解决t_certificate表的基本增删改查 -->
+<mapper namespace="edu.usts.sddb.dao.CertificateDao">
+
+    <select id="findAll" resultType="edu.usts.sddb.entity.Certificate">
+		select * from t_certificate order by ce_id asc
+	</select>
+
+    <select id="findCeByCeid" parameterType="String"
+            resultType="edu.usts.sddb.entity.Certificate">
+		select * from t_certificate where ce_student_id = #{ce_student_id}
+	</select>
+
+    <select id="findByPage" resultType="edu.usts.sddb.entity.Certificate">
+		select * from
+		t_certificate
+		order by ce_id desc
+		limit #{0},#{1}
+	</select>
+
+    <select id="getSum" resultType="int">
+		select count(*) from
+		t_certificate
+	</select>
+
+    <select id="findByFiltersSum" resultType="int" parameterType="string">
+		${_parameter}
+	</select>
+
+    <select id="findByFilters" parameterType="string" resultType="edu.usts.sddb.entity.Certificate">
+		${_parameter}
+	</select>
+
+    <insert id="add" parameterType="edu.usts.sddb.entity.Certificate">
+		replace into t_certificate (ce_student_id,ce_student_name,
+		ce_edu_year,ce_edu_term,ce_name,ce_time,ce_score)
+		values (#{ce_student_id},#{ce_student_name},#{ce_edu_year},
+		#{ce_edu_term},#{ce_name},#{ce_time},#{ce_score})
+	</insert>
+
+    <delete id="del" parameterType="string">
+		delete from t_certificate where ce_id = #{ce_id}
+	</delete>
+
+
+    <update id="edit" parameterType="edu.usts.sddb.entity.Certificate">
+		update t_certificate set
+		ce_student_id=#{ce_student_id},ce_student_name=#{ce_student_name},
+		ce_edu_year=#{ce_edu_year},ce_edu_term=#{ce_edu_term},ce_name=#{ce_name},
+		ce_time=#{ce_time},ce_score=#{ce_score}
+		where
+		ce_id=#{ce_id}
+	</update>
+
+    <!--返回表中注释-->
+    <select id="findComment" resultType="edu.usts.sddb.entity.assist.DBComment">
+		show full fields from t_certificate
+	</select>
+
+</mapper>

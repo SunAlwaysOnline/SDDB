@@ -1,0 +1,4 @@
+/*为鼠标划过学号时，添加下划线*/
+.p_st_id:hover{
+	text-decoration:underline;
+}

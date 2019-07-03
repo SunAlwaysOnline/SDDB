@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd    
+        http://www.springframework.org/schema/mvc   
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd    
+        http://www.springframework.org/schema/context   
+        http://www.springframework.org/schema/context/spring-context.xsd  
+        http://www.springframework.org/schema/tx    
+        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+    <!-- 开启注解 -->
+    <mvc:annotation-driven/>
+    <!-- 配置自定义扫描包 -->
+    <context:component-scan base-package="edu.usts.sddb.controller"/>
+    <context:component-scan base-package="edu.usts.sddb.service"/>
+
+    <!-- 配置视图解析器: 如何把 handler 方法返回值解析为实际的物理视图 -->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+    <!--文件上传解析处理器-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    </bean>
+
+    <!-- 静态资源处理-->
+    <mvc:default-servlet-handler/>
+
+
+    <!--
+    4. 配置 LifecycleBeanPostProcessor. 可以自定的来调用配置在 Spring IOC 容器中 shiro bean 的生命周期方法.
+    -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <!--
+    5. 启用 IOC 容器中使用 shiro 的注解. 但必须在配置了 LifecycleBeanPostProcessor 之后才可以使用.
+    -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor"/>
+
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
+    <!-- 全局异常处理器 <bean class="edu.usts.sddb.exception.CustomExceptionResolver"></bean> -->
+</beans>

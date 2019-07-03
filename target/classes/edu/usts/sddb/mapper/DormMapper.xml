@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 此配置文件解决dorm表的基本增删改查 是DormDao的逻辑表现 -->
+
+
+<mapper namespace="edu.usts.sddb.dao.DormDao">
+    <select id="findDistinctDorm" resultType="String">
+      select distinct d_name from t_dorm order by d_name asc
+    </select>
+
+    <select id="findByDormName" parameterType="String" resultType="edu.usts.sddb.entity.Dorm">
+      select * from t_dorm where d_name=#{d_name} order by d_no asc
+    </select>
+
+
+
+
+</mapper>

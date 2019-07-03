@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        ">
+
+
+    <!-- 1.dataSource配置 -->
+
+    <import resource="classpath:config/druid.xml"/>
+
+    <!-- 2.Mybatis 的 SqlSession的工厂：SqlSessionFactoryBean dataSource引用数据源 Mybatis
+        定义数据源，同意加载配置 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="druidDataSource"></property>
+        <property name="mapperLocations" value="classpath:edu/usts/sddb/mapper/*.xml"></property>
+    </bean>
+
+
+    <!-- 3. Mybatis自动扫描加载Sql映射文件/接口：MapperScannerConfigurer sqlSessionFactory
+        basePackage:指定sql映射文件/接口所在的包（自动扫描） -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="edu.usts.sddb.dao"></property>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+    </bean>
+
+    <import resource="spring-shiro.xml"></import>
+    <import resource="spring-task.xml"></import>
+
+    <!-- 4.配置事务-->
+    <!--<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="druidDataSource"/>
+    </bean>
+
+    <tx:advice id="adv">
+        <tx:attributes>
+            <tx:method name="set*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="query*" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id="point" expression="execution(* service.*.*(..))"></aop:pointcut>
+        <aop:advisor advice-ref="adv" pointcut-ref="point"/>
+    </aop:config>-->
+
+
+</beans>

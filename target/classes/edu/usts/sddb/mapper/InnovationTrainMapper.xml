@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 此配置文件解决t_innovation_train表的基本增删改查 -->
+<mapper namespace="edu.usts.sddb.dao.InnovationTrainDao">
+
+    <select id="findAll" resultType="edu.usts.sddb.entity.InnovationTrain">
+		select * from t_innovation_train order by in_id desc
+	</select>
+
+    <select id="findByName" parameterType="String"
+            resultType="edu.usts.sddb.entity.InnovationTrain">
+		select * from t_innovation_train where in_students like "%"#{name}"%"
+	</select>
+
+    <select id="findByPage" resultType="edu.usts.sddb.entity.InnovationTrain">
+		select * from
+		t_innovation_train
+		order by in_id desc
+		limit #{0},#{1}
+	</select>
+
+
+    <select id="getSum" resultType="int">
+		select count(*) from
+		t_innovation_train
+	</select>
+
+    <select id="findByFiltersSum" resultType="int" parameterType="string">
+		${_parameter}
+	</select>
+
+    <select id="findByFilters" parameterType="string" resultType="edu.usts.sddb.entity.InnovationTrain">
+		${_parameter}
+	</select>
+
+    <insert id="add" parameterType="edu.usts.sddb.entity.InnovationTrain">
+	insert into t_innovation_train(in_year,in_name,in_students,in_teachers,in_category)
+	values (#{in_year},#{in_name},#{in_students},#{in_teachers},#{in_category})
+	</insert>
+
+    <delete id="del" parameterType="string">
+		delete from t_innovation_train where in_id = #{in_id}
+	</delete>
+
+
+    <update id="edit" parameterType="edu.usts.sddb.entity.InnovationTrain">
+		update t_innovation_train set
+		in_year=#{in_year},in_name=#{in_name},in_students=#{in_students},in_teachers=#{in_teachers},
+		in_category=#{in_category}
+		where
+		in_id=#{in_id}
+	</update>
+
+
+    <!--返回表中注释-->
+    <select id="findComment" resultType="edu.usts.sddb.entity.assist.DBComment">
+		show full fields from t_innovation_train
+	</select>
+
+</mapper>

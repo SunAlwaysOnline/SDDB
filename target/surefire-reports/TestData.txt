@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: TestData
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.096 s <<< FAILURE! - in TestData
+getData(TestData)  Time elapsed: 0.037 s  <<< ERROR!
+java.lang.NoSuchMethodError: edu.usts.sddb.util.ResultUtil.getDataFromRules()V
+	at TestData.getData(TestData.java:7)
+

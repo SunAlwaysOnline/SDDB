@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: TestExcel
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.804 s <<< FAILURE! - in TestExcel
+get(TestExcel)  Time elapsed: 0.015 s  <<< ERROR!
+java.lang.NullPointerException
+	at TestExcel.get(TestExcel.java:63)
+

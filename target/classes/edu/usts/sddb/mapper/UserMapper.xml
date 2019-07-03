@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 此配置文件解决user表的基本增删改查 是UserDao的逻辑表现 -->
+<mapper namespace="edu.usts.sddb.dao.UserDao">
+
+    <select id="findByUserId" parameterType="String" resultType="edu.usts.sddb.entity.User">
+		select * from t_user where us_id=#{us_id}
+	</select>
+
+    <select id="findAll" parameterType="edu.usts.sddb.entity.User" resultType="edu.usts.sddb.entity.User">
+		select us_id,us_name,us_type  from t_user
+	</select>
+
+    <insert id="addUser" parameterType="edu.usts.sddb.entity.User">
+		insert into t_user(us_id,us_name,us_password,us_type)
+		values (#{us_id},#{us_name},#{us_password},#{us_type})
+	</insert>
+
+    <!--重置密码-->
+    <update id="resetPassword" parameterType="edu.usts.sddb.entity.User">
+		update t_user
+		set us_password=#{us_password}
+		where us_id=#{us_id}
+	</update>
+
+    <update id="addVisitNumber" parameterType="String">
+		update t_user
+		set us_view=us_view+1
+		where us_id=#{us_id}
+	</update>
+
+    <update id="edit" parameterType="edu.usts.sddb.entity.User">
+		update t_user
+		set us_phone=#{us_phone},us_qq=#{us_qq},us_email=#{us_email},us_intro=#{us_intro}
+  		where us_id=#{us_id}
+	</update>
+
+	<update id="editAllowDetail" parameterType="edu.usts.sddb.entity.User">
+		update t_user
+		set us_allow_detail=#{us_allow_detail}
+  		where us_id=#{us_id}
+	</update>
+
+</mapper>

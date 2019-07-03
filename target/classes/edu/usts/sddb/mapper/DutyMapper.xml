@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 此配置文件解决duty表的基本增删改查 是DutyDao的逻辑表现 -->
+
+
+<mapper namespace="edu.usts.sddb.dao.DutyDao">
+
+    <!--获取总数-->
+    <select id="getSum" resultType="int">
+		select count(*) from t_duty
+	</select>
+
+    <!--分页显示-->
+    <select id="findByPage" resultType="edu.usts.sddb.entity.Duty">
+		select * from t_duty order by du_id desc limit #{0},#{1}
+	</select>
+
+    <!--按条件进行查找,返回总条数,语句较为复杂-->
+    <select id="findByFiltersSum" resultType="int" parameterType="String">
+		${_parameter}
+	</select>
+
+    <!--按条件进行查找,返回总记录数,语句较为复杂-->
+    <select id="findByFilters" parameterType="String" resultType="edu.usts.sddb.entity.Duty">
+		${_parameter}
+	</select>
+
+    <!--返回表中注释-->
+    <select id="findComment" resultType="edu.usts.sddb.entity.assist.DBComment">
+		show full fields from t_duty
+	</select>
+
+    <!--根据学号查找职务-->
+    <select id="findDutyById" parameterType="String" resultType="edu.usts.sddb.entity.Duty">
+		 select * from t_duty where du_student_id=#{du_student_id}
+	</select>
+
+    <!--新增，遇到主键重复，则更新，否则正常插入-->
+    <insert id="add" parameterType="edu.usts.sddb.entity.Duty">
+        replace into t_duty(du_student_id,du_student_name,du_time,du_name)
+        values (#{du_student_id},#{du_student_name},#{du_time},#{du_name});
+    </insert>
+
+    <delete id="del" parameterType="String">
+        delete from t_duty where du_id=#{du_id};
+    </delete>
+
+    <update id="edit" parameterType="edu.usts.sddb.entity.Duty">
+        update t_duty set du_student_id=#{du_student_id},du_student_name=#{du_student_name},
+        du_time=#{du_time},du_name=#{du_name}
+        where du_id=#{du_id};
+    </update>
+
+
+</mapper>

@@ -1,0 +1,87 @@
+{
+	"major": "电子信息工程",
+	"nodes": [
+		{
+			"color": "#19c719",
+			"label": "信号与系统A",
+			"attributes": "",
+			"id": "信号与系统A",
+			"size": 10
+		}, {
+			"color": "#c71969",
+			"label": "程序设计基础",
+			"attributes": "",
+			"id": "程序设计基础",
+			"size": 10
+		}, {
+			"color": "#9fc719",
+			"label": "模拟电子技术",
+			"attributes": "",
+			"id": "模拟电子技术",
+			"size": 10
+		}, {
+			"color": "#1969c7",
+			"label": "微处理器与接口技术",
+			"attributes": "",
+			"id": "微处理器与接口技术",
+			"size": 10
+		}, {
+			"color": "#c78419",
+			"label": "数字电子技术",
+			"attributes": "",
+			"id": "数字电子技术",
+			"size": 10
+		}, {
+			"color": "#69c719",
+			"label": "通信原理A(一)",
+			"attributes": "",
+			"id": "通信原理A(一)",
+			"size": 10
+		}, {
+			"color": "#9f19c7",
+			"label": "电磁场与电磁波",
+			"attributes": "",
+			"id": "电磁场与电磁波",
+			"size": 10
+		}, {
+			"color": "#199fc7",
+			"label": "电路分析",
+			"attributes": "",
+			"id": "电路分析",
+			"size": 10
+		}
+	],
+	"edges": [
+		{
+			"sourceID": "微处理器与接口技术",
+			"attributes": "",
+			"targetID": "通信原理A(一)",
+			"size": 1
+		}, {
+			"sourceID": "数字电子技术",
+			"attributes": "",
+			"targetID": "通信原理A(一)",
+			"size": 1
+		}, {
+			"sourceID": "电路分析",
+			"attributes": "",
+			"targetID": "电磁场与电磁波",
+			"size": 1
+		}, {
+			"sourceID": "程序设计基础",
+			"attributes": "",
+			"targetID": "电磁场与电磁波",
+			"size": 1
+		}, {
+			"sourceID": "信号与系统A",
+			"attributes": "",
+			"targetID": "通信原理A(一)",
+			"size": 1
+		}, {
+			"sourceID": "模拟电子技术",
+			"attributes": "",
+			"targetID": "通信原理A(一)",
+			"size": 1
+		}
+	]
+}

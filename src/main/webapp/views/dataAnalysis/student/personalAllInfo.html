@@ -1,0 +1,1822 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta charset="utf-8" />
+		<title>发展综合分析</title>
+
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+		<!-- bootstrap & fontawesome -->
+		<link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+
+		<!-- page specific plugin styles -->
+		<link rel="stylesheet" href="/assets/css/jquery-ui.min.css" />
+
+		<!-- text fonts -->
+		<link rel="stylesheet" href="/assets/css/fonts.googleapis.com.css" />
+
+		<!-- ace styles -->
+		<link rel="stylesheet" href="/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+
+		<!--[if lte IE 9]>
+			<link rel="stylesheet" href="/assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
+		<![endif]-->
+		<link rel="stylesheet" href="/assets/css/ace-skins.min.css" />
+		<link rel="stylesheet" href="/assets/css/ace-rtl.min.css" />
+
+		<!--[if lte IE 9]>
+		  <link rel="stylesheet" href="/assets/css/ace-ie.min.css" />
+		<![endif]-->
+
+		<!-- inline styles related to this page -->
+
+		<!-- ace settings handler -->
+		<script src="/assets/js/ace-extra.min.js"></script>
+
+		<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+
+		<!--[if lte IE 8]>
+		<script src="/assets/js/html5shiv.min.js"></script>
+		<script src="/assets/js/respond.min.js"></script>
+		<![endif]-->
+	</head>
+
+	<body class="no-skin">
+		<div id="navbar" class="navbar navbar-default          ace-save-state">
+			<div class="navbar-container ace-save-state" id="navbar-container">
+				<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+					<span class="sr-only">Toggle sidebar</span>
+
+					<span class="icon-bar"></span>
+
+					<span class="icon-bar"></span>
+
+					<span class="icon-bar"></span>
+				</button>
+
+				<div class="navbar-header pull-left">
+					<a href="/views/index.html" class="navbar-brand">
+						<small>
+							<i class="fa fa-leaf"></i>
+							学生发展数据综合评价与分析系统
+						</small>
+					</a>
+				</div>
+
+				<div class="navbar-buttons navbar-header pull-right" role="navigation">
+					<ul class="nav ace-nav">
+
+						<li class="light-blue dropdown-modal">
+							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+
+								<img class="nav-user-photo us_photo" src="/assets/images/avatars/blank.jpg" alt="个人头像" style="background-color:#fff" />
+
+								<span class="user-info">
+							       <span id="us_name"></span>
+								</span>
+
+								<i class="ace-icon fa fa-caret-down"></i>
+							</a>
+
+							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+								<li>
+									<a id="setting" target="_blank">
+										<i class="ace-icon fa fa-cog"></i> 设置
+									</a>
+								</li>
+
+								<li>
+									<a id="profile" target="_blank">
+										<i class="ace-icon fa fa-user"></i> 个人信息
+									</a>
+								</li>
+
+								<li class="divider"></li>
+
+								<li>
+									<a href="/login.html" onclick="logout()">
+										<i class="ace-icon fa fa-power-off"></i> 注销
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- /.navbar-container -->
+		</div>
+
+		<div class="main-container ace-save-state" id="main-container">
+			<script type="text/javascript">
+				try {
+					ace.settings.loadState('main-container')
+				} catch(e) {}
+			</script>
+
+			<div id="sidebar" class="sidebar                  responsive                    ace-save-state">
+				<script type="text/javascript">
+					try {
+						ace.settings.loadState('sidebar')
+					} catch(e) {}
+				</script>
+
+				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+						<button class="btn btn-success">
+							<i class="ace-icon fa fa-signal"></i>
+						</button>
+
+						<button class="btn btn-info">
+							<i class="ace-icon fa fa-pencil"></i>
+						</button>
+
+						<button class="btn btn-warning">
+							<i class="ace-icon fa fa-users"></i>
+						</button>
+
+						<button class="btn btn-danger">
+							<i class="ace-icon fa fa-cogs"></i>
+						</button>
+					</div>
+
+					<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+						<span class="btn btn-success"></span>
+
+						<span class="btn btn-info"></span>
+
+						<span class="btn btn-warning"></span>
+
+						<span class="btn btn-danger"></span>
+					</div>
+				</div>
+				<!-- /.sidebar-shortcuts -->
+
+				<ul class="nav nav-list">
+					<li class="">
+						<a href="/views/index.html">
+							<i class="menu-icon fa fa-tachometer"></i>
+							<span class="menu-text"> 我的首页 </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-tasks"></i>
+							<span class="menu-text"> 数据管理 </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+
+							<li class="">
+								<a href="/views/dataManage/studentManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 学生
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/teacherManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 教师
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/majorManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 专业
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/classroomManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 班级
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/scoreManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 成绩
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/certificateManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 证书
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/competitionManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 竞赛
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/innovationTrainManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 创新训练
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/scholarshipManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 奖学金
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/excellentStudentManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 优秀学生
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/pushExcellentManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 推优
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/partyMemberManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 入党
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/postGraduateManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 考研录取
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/volunteerManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 志愿服务
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/dutyManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 学生干部
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/dataManage/adviceManage.html">
+									<i class="menu-icon fa fa-caret-right"></i> 发展建议
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+						</ul>
+					</li>
+
+					<li class="active open">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-bar-chart-o"></i>
+							<span class="menu-text"> 数据分析 </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="active open">
+								<a href="#" class="dropdown-toggle">
+									<i class="menu-icon fa fa-caret-right"></i> 个人情况分析
+									<b class="arrow fa fa-angle-down"></b>
+								</a>
+
+								<b class="arrow"></b>
+
+								<ul class="submenu">
+									<li class="">
+										<a href="/views/dataAnalysis/student/personalGrade.html">
+											<i class="menu-icon fa fa-leaf green"></i>个人成绩查询
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+									<li class="active">
+										<a href="/views/dataAnalysis/student/personalAllInfo.html">
+											<i class="menu-icon fa fa-leaf green"></i>发展综合分析
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+
+								</ul>
+							</li>
+
+							<li class="">
+								<a href="/views/dataAnalysis/dorm/dormAtmosphere.html">
+									<i class="menu-icon fa fa-caret-right"></i> 宿舍情况分析
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="/views/dataAnalysis/classroom/classAtmosphere.html">
+									<i class="menu-icon fa fa-caret-right"></i> 班级情况分析
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="#" class="dropdown-toggle">
+									<i class="menu-icon fa fa-caret-right"></i> 整体学业分析
+									<b class="arrow fa fa-angle-down"></b>
+								</a>
+
+								<b class="arrow"></b>
+
+								<ul class="submenu">
+									<li class="">
+										<a href="/views/dataAnalysis/all/allGrade.html">
+											<i class="menu-icon fa fa-leaf green"></i>学分积欠情况分析
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+									<li class="">
+										<a href="/views/dataAnalysis/all/make_up_rebuild.html">
+											<i class="menu-icon fa fa-leaf green"></i>补考重修情况分析
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+
+								</ul>
+							</li>
+
+						</ul>
+					</li>
+
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-book"></i>
+							<span class="menu-text"> 数据预测 </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="">
+								<a href="/views/bigDataAnalysis/courseDependence.html">
+									<i class="menu-icon fa fa-caret-right"></i> 课程通过预警
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="/views/bigDataAnalysis/scorePosition.html">
+									<i class="menu-icon fa fa-caret-right"></i> 成绩位置预测
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="/views/bigDataAnalysis/postGraduate.html">
+									<i class="menu-icon fa fa-caret-right"></i> 考研录取预测
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="/views/bigDataAnalysis/partyMember.html">
+									<i class="menu-icon fa fa-caret-right"></i> 入党情况预测
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+						</ul>
+					</li>
+
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-folder-open-o"></i>
+							<span class="menu-text"> 文件操作 </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="">
+								<a href="/views/file/fileUpload.html">
+									<i class="menu-icon fa fa-caret-right"></i> 文件上传
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="/views/file/fileDownload.html">
+									<i class="menu-icon fa fa-caret-right"></i> 文件下载
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+						</ul>
+					</li>
+
+				</ul>
+				<!-- /.nav-list -->
+
+				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+					<i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+				</div>
+			</div>
+
+			<div class="main-content">
+				<div class="main-content-inner">
+					<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+						<ul class="breadcrumb">
+							<li>
+								<i class="ace-icon fa fa-home home-icon"></i>
+								<a href="/views/index.html">首页</a>
+							</li>
+
+							<li class="active">发展综合分析</li>
+						</ul>
+						<!-- /.breadcrumb -->
+
+					</div>
+
+					<div class="page-content">
+
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+								<div class="row">
+									<div class="col-sm-10">
+										<h3 class="header blue lighter smaller">
+											<i class="ace-icon fa fa-spinner"></i>
+											发展综合分析
+										</h3>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-2">
+										<center>
+											<label for="st_grade">选择年级 : </label>
+											<select name="st_grade" id="st_grade" style="width: 120px;margin-left: 5px;">
+												<!--<option selected="selected" value=""></option>
+												<option value="2014">2014</option>
+												<option value="2015">2015</option>
+												<option value="2016">2016</option>
+												<option value="2017">2017</option>
+												<option value="2018">2018</option>
+												<option value="2019"></option>-->
+											</select>
+										</center>
+									</div>
+									<div class="col-sm-2">
+										<center>
+											<label for="st_major">选择专业 : </label>
+
+											<select name="st_major" id="st_major" style="width: 120px;margin-left: 5px;">
+												<!--<option selected="selected" value=""></option>
+												<option value="2014">计算机嵌入式</option>
+												<option value="2015">2015</option>
+												<option value="2016">2016</option>
+												<option value="2017">2017</option>
+												<option value="2018">2018</option>-->
+											</select>
+										</center>
+									</div>
+
+									<div class="col-sm-2">
+										<center>
+											<label for="st_class">选择班级 : </label>
+
+											<select name="st_class" id="st_class" style="width: 120px;margin-left: 5px;">
+												<!--<option selected="selected" value=""></option>
+												<option value="2014">嵌入式1511</option>
+												<option value="2015">2015</option>
+												<option value="2016">2016</option>
+												<option value="2017">2017</option>
+												<option value="2018">2018</option>-->
+											</select>
+										</center>
+									</div>
+
+									<div class="col-sm-2">
+										<center>
+											<label for="st_name">选择姓名 : </label>
+
+											<select name="st_name" id="st_name" style="width: 120px;margin-left: 5px;">
+											</select>
+										</center>
+
+									</div>
+									<div class="col-sm-2">
+										<center>
+											<button id="query" class="btn btn-info btn-sm">
+										<span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
+									&nbsp;查&nbsp;找&nbsp;
+									  </button>
+										</center>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-sm-10">
+										<h3 class="header blue lighter smaller">
+										</h3>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-6">
+
+										<div class="widget-box transparent">
+											<div class="widget-header widget-header-flat">
+												<h4 class="widget-title lighter">
+													<i class="ace-icon fa fa-star orange"></i>
+													成绩变化图
+												</h4>
+
+												<div class="widget-toolbar">
+													<a href="#" data-action="collapse">
+														<i class="ace-icon fa fa-chevron-up"></i>
+													</a>
+												</div>
+											</div>
+
+											<div class="widget-body">
+												<div class="widget-main no-padding">
+													<div id="main" style="height: 380px;margin-top: 25px;"></div>
+												</div>
+												<!-- /.widget-main -->
+											</div>
+											<!-- /.widget-body -->
+										</div>
+										<!-- /.widget-box -->
+									</div>
+									<div class="col-sm-6">
+
+										<div class="widget-box transparent">
+											<div class="widget-header widget-header-flat">
+												<h4 class="widget-title lighter">
+													<i class="ace-icon fa fa-star orange"></i>
+													学分积欠图
+												</h4>
+
+												<div class="widget-toolbar">
+													<a href="#" data-action="collapse">
+														<i class="ace-icon fa fa-chevron-up"></i>
+													</a>
+												</div>
+											</div>
+
+											<div class="widget-body">
+												<div class="widget-main no-padding">
+													<!-- 个人学分积欠变化趋势图 -->
+													<div id="ch_lack_credit" style="height:380px;margin-top: 25px;"></div>
+												</div>
+												<!-- /.widget-main -->
+											</div>
+											<!-- /.widget-body -->
+										</div>
+										<!-- /.widget-box -->
+									</div>
+
+								</div>
+
+								<div class="row">
+									<div class="col-sm-10">
+										<div class="hr hr24 hr-dotted"></div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-sm-6">
+
+										<div class="widget-box transparent">
+											<div class="widget-header widget-header-flat">
+												<h4 class="widget-title lighter">
+													<i class="ace-icon fa fa-star orange"></i>
+												成绩分布图
+												</h4>
+
+												<div class="widget-toolbar">
+													<a href="#" data-action="collapse">
+														<i class="ace-icon fa fa-chevron-up"></i>
+													</a>
+												</div>
+											</div>
+
+											<div class="widget-body">
+												<div class="widget-main no-padding">
+													<!--成绩分布图-->
+													<div id="st_grade_distribute" style="height:380px;margin-top: 25px;margin-left: 30px;"></div>
+												</div>
+												<!-- /.widget-main -->
+											</div>
+											<!-- /.widget-body -->
+										</div>
+										<!-- /.widget-box -->
+									</div>
+
+									<!--个人获奖-->
+									<div class="col-sm-6">
+										<div class="widget-box transparent">
+											<div class="widget-header widget-header-flat">
+												<h4 class="widget-title lighter">
+													<i class="ace-icon fa fa-star orange"></i>
+													个人获奖情况
+												</h4>
+
+												<div class="widget-toolbar">
+													<a href="#" data-action="collapse">
+														<i class="ace-icon fa fa-chevron-up"></i>
+													</a>
+												</div>
+											</div>
+
+											<div class="widget-body" style="padding-right: 50px;">
+												<div class="widget-main no-padding">
+													<table class="table table-bordered table-striped table-hover" style="margin-top: 25px;margin-left: 30px;" id="st_award">
+														<thead class="thin-border-bottom" style="visibility: hidden;" id="st_award_title">
+															<tr>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="3">获奖日期</font>
+																</th>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="3">奖项名称</font>
+																</th>
+															</tr>
+														</thead>
+														<tbody id="st_award_tbody"></tbody>
+													</table>
+												</div>
+												<!-- /.widget-main -->
+											</div>
+											<!-- /.widget-body -->
+										</div>
+										<!-- /.widget-box -->
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-sm-10">
+										<div class="hr hr24 hr-dotted"></div>
+									</div>
+								</div>
+
+								<div class="row">
+
+									<!--雷达图-->
+									<div class="col-sm-6">
+
+										<div class="widget-box transparent">
+											<div class="widget-header widget-header-flat">
+												<h4 class="widget-title lighter">
+													<i class="ace-icon fa fa-star orange"></i>
+													综合素质
+												</h4>
+
+												<div class="widget-toolbar">
+													<a href="#" data-action="collapse">
+														<i class="ace-icon fa fa-chevron-up"></i>
+													</a>
+												</div>
+											</div>
+
+											<div class="widget-body">
+												<div class="widget-main no-padding">
+													<center>
+														<div id="st_radar" style="width:450px;height: 380px;margin-left: 20px;margin-top: 25px;"></div>
+													</center>
+												</div>
+												<!-- /.widget-main -->
+											</div>
+											<!-- /.widget-body -->
+										</div>
+										<!-- /.widget-box -->
+									</div>
+
+									<!--服务精神-->
+									<div class="col-sm-6">
+
+										<div class="widget-box transparent">
+											<div class="widget-header widget-header-flat">
+												<h4 class="widget-title lighter">
+													<i class="ace-icon fa fa-star orange"></i>
+													服务精神
+												</h4>
+
+												<div class="widget-toolbar">
+													<a href="#" data-action="collapse">
+														<i class="ace-icon fa fa-chevron-up"></i>
+													</a>
+												</div>
+											</div>
+
+											<div class="widget-body">
+												<div class="widget-main no-padding" style="margin-bottom: 30px;">
+													<table class="table table-bordered table-striped table-hover" style="margin-top: 25px;margin-left: 30px;" id="st_vol">
+														<thead class="thin-border-bottom" style="visibility: hidden;" id="st_vol_title">
+															<tr>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="3">总志愿时长</font>
+																</th>
+
+															</tr>
+														</thead>
+														<tbody id="st_vol_tbody"></tbody>
+													</table>
+												</div>
+
+												<div class="widget-main no-padding" style="margin-bottom: 30px;">
+													<table class="table table-bordered table-striped table-hover" style="margin-top: 25px;margin-left: 30px;" id="st_vol_rank">
+														<thead class="thin-border-bottom" style="visibility: hidden;" id="st_vol_rank_title">
+															<tr>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="3">志愿时长排名</font>
+																</th>
+
+															</tr>
+														</thead>
+													</table>
+												</div>
+
+												<div class="row clearfix" style="margin-bottom: 30px;">
+													<div class="grid3 center">
+
+														<div id="data_class" class="easy-pie-chart percentage" data-percent="0" data-color="#D15B47">
+															<span class="percent" id="sp_class"></span>
+														</div>
+
+													</div>
+													<div class="grid3 center">
+
+														<div id="data_grade" class="easy-pie-chart percentage" data-percent="0" data-color="#9585BF">
+															<span class="percent" id="sp_grade"></span>
+														</div>
+
+													</div>
+
+													<div class="grid3 center">
+
+														<div id="data_academy" class="easy-pie-chart percentage" data-percent="0" data-color="#87B87F">
+															<span class="percent" id="sp_academy"></span>
+														</div>
+
+													</div>
+
+												</div>
+
+												<div class="widget-main no-padding">
+													<table class="table table-bordered table-striped table-hover" style="margin-left: 30px;" id="st_duty">
+														<thead class="thin-border-bottom" style="visibility: hidden;" id="st_duty_title">
+															<tr>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="3">担任时间</font>
+																</th>
+																<th>
+																	<i class="ace-icon fa fa-caret-right blue"></i>
+																	<font size="3">担任职务</font>
+																</th>
+															</tr>
+														</thead>
+														<tbody id="st_duty_tbody"></tbody>
+													</table>
+												</div>
+												<!-- /.widget-main -->
+											</div>
+											<!-- /.widget-body -->
+										</div>
+										<!-- /.widget-box -->
+									</div>
+
+								</div>
+								<!-- /.row -->
+								<div class="row">
+									<div class="col-sm-10">
+										<div class="hr hr24 hr-dotted"></div>
+									</div>
+								</div>
+								<!--个人发展建议-->
+								<div class="row">
+									<div class="col-sm-6">
+
+										<div class="widget-box transparent">
+											<div class="widget-header widget-header-flat">
+												<h4 class="widget-title lighter">
+													<i class="ace-icon fa fa-star orange"></i>
+													个人发展建议
+												</h4>
+
+												<div class="widget-toolbar">
+													<a href="#" data-action="collapse">
+														<i class="ace-icon fa fa-chevron-up"></i>
+													</a>
+												</div>
+											</div>
+
+											<div class="widget-body">
+												<div class="widget-main no-padding">
+
+													<div class="tabbable">
+														<ul class="nav nav-tabs padding-12 tab-color-blue background-blue" id="myTab4">
+															<li class="active">
+																<a data-toggle="tab" href="#study">学习成绩建议</a>
+															</li>
+
+															<li>
+																<a data-toggle="tab" href="#sport">身体素质建议</a>
+															</li>
+
+															<li>
+																<a data-toggle="tab" href="#sciense">科研情况建议</a>
+															</li>
+															<li>
+																<a data-toggle="tab" href="#volunteer">志愿服务建议</a>
+															</li>
+														</ul>
+
+														<div class="tab-content">
+															<div id="study" class="tab-pane in active">
+																<p style="font-size: 17px;color: black;text-indent: 2em;" id="p_study"></p>
+															</div>
+
+															<div id="sport" class="tab-pane">
+																<p style="font-size: 17px;color: black;text-indent: 2em;" id="p_sport"></p>
+															</div>
+
+															<div id="sciense" class="tab-pane">
+																<p style="font-size: 17px;color: black;text-indent: 2em;" id="p_sciense"></p>
+															</div>
+															<div id="volunteer" class="tab-pane">
+																<p style="font-size: 17px;color: black;text-indent: 2em;" id="p_volunteer"></p>
+															</div>
+														</div>
+													</div>
+												</div>
+												<!-- /.widget-main -->
+											</div>
+											<!-- /.widget-body -->
+										</div>
+										<!-- /.widget-box -->
+
+									</div>
+									<!-- /.col -->
+								</div>
+							</div>
+
+							<!-- ECharts文件引入 -->
+							<script src="/assets/js/echarts-all.js"></script>
+							<script src="/assets/js/jquery-2.1.4.min.js"></script>
+
+							<!-- PAGE CONTENT ENDS -->
+
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /.page-content -->
+				</div>
+			</div>
+			<!-- /.main-content -->
+
+			<div class="footer">
+				<div class="footer-inner">
+					<div class="footer-content">
+						<span class="bigger-120">
+							<span class="blue bolder" style="margin-right: 10px;">学生发展数据综合评价与分析系统</span> 苏州科技大学 &copy; 2018-2019
+						</span>
+
+					</div>
+				</div>
+			</div>
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+			</a>
+		</div>
+		<!-- /.main-container -->
+
+		<!-- basic scripts -->
+
+		<!--[if !IE]> -->
+		<script src="/assets/js/jquery-2.1.4.min.js"></script>
+		<script src="/assets/js/jquery.form.js"></script>
+		<script src="/assets/js/jquery.cookie.js"></script>
+		<script src="/assets/js/sddb.util.js"></script>
+
+		<script src="/assets/js/jquery.easypiechart.min.js"></script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script src="/assets/js/jquery-1.11.3.min.js"></script>
+<![endif]-->
+		<script type="text/javascript">
+			if('ontouchstart' in document.documentElement) document.write("<script src='/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+		</script>
+		<script src="/assets/js/bootstrap.min.js"></script>
+
+		<!-- page specific plugin scripts -->
+		<script src="/assets/js/jquery-ui.min.js"></script>
+		<script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
+
+		<!-- ace scripts -->
+		<script src="/assets/js/ace-elements.min.js"></script>
+		<script src="/assets/js/ace.min.js"></script>
+
+		<!-- inline scripts related to this page -->
+
+		<!--选择学生-->
+		<script type="text/javascript">
+			//总体数据
+			var arrayGrade = [];
+
+			//判断数组中是否存在此数
+			function isExist(array, n) {
+				for(var i = 0; i < array.length; i++) {
+					if(array[i] == n) {
+						return true;
+					}
+				}
+				return false;
+
+			}
+			//先得到年级
+			function getGrade(arrayGrade) {
+
+				var grade = [" "];
+				for(var i = 0; i < arrayGrade.length; i++) {
+					//先判断grade中是否存在该数字
+					var grade_item = arrayGrade[i].cl_grade;
+					if(!isExist(grade, grade_item)) {
+						grade.push(grade_item);
+					}
+				}
+				//遍历grade数组，将值填入进年级下拉框中
+				var sel_grade = document.getElementById("st_grade");
+				for(var j = 0; j < grade.length; j++) {
+					var temp = grade[j];
+					sel_grade.options[j] = new Option(temp, temp);
+				}
+			}
+
+			//st_grade的改变事件
+			$("#st_grade").change(function() {
+				var major = [" "];
+				var grade = $("#st_grade option:selected").val();
+
+				//取出指定年级的不重复的专业
+				for(var i = 0; i < arrayGrade.length; i++) {
+					var temp_grade = arrayGrade[i].cl_grade;
+					var temp_major = arrayGrade[i].cl_major;
+
+					if((temp_grade == grade) && (!isExist(major, temp_major))) {
+						major.push(temp_major);
+					}
+				}
+
+				var sel_major = document.getElementById("st_major");
+				//清空之前的专业下拉框与班级下拉框、学生姓名下拉框
+				$("#st_major").empty();
+				$("#st_class").empty();
+				$("#st_name").empty();
+
+				for(var j = 0; j < major.length; j++) {
+					sel_major.options[j] = new Option(major[j], major[j]);
+				}
+			});
+
+			//st_major的改变事件
+
+			$("#st_major").change(function() {
+
+				var sclass = [" "];
+				var grade = $("#st_grade option:selected").val();
+				var major = $("#st_major option:selected").val();
+
+				//取出指定年级、专业的班级
+				for(var i = 0; i < arrayGrade.length; i++) {
+					var temp_grade = arrayGrade[i].cl_grade;
+					var temp_major = arrayGrade[i].cl_major;
+					if((temp_grade == grade) && (temp_major == major)) {
+						sclass.push(arrayGrade[i].cl_name);
+					}
+				}
+
+				///清空之前的班级下拉框
+				$("#st_class").empty();
+				$("#st_name").empty();
+
+				var sel_class = document.getElementById("st_class");
+				for(var j = 0; j < sclass.length; j++) {
+					sel_class.options[j] = new Option(sclass[j], sclass[j]);
+				}
+			})
+
+			//st_class的改变事件，需要使用ajax来获取班级学生
+			$("#st_class").change(function() {
+				//清空学生
+				$("#st_name").empty();
+				var sclass = $("#st_class option:selected").val();
+				if(sclass == " ") {
+					return;
+				}
+				//使用ajax来获取学生
+				$.ajax({
+					type: "post",
+					url: "/student/findStuByClass.do",
+					dataType: 'json',
+					data: {
+						st_class: sclass
+					},
+					success: function(data) {
+						var stu = document.getElementById("st_name");
+						for(var i = 0; i < data.length; i++) {
+							stu.options[i] = new Option(data[i].st_name, data[i].st_id);
+						}
+					},
+					error: function(err) {
+						alert("获取学生发生错误！");
+					}
+				});
+			})
+
+			$(function() {
+				//ajax请求获取班级
+				$.ajax({
+					type: "post",
+					url: "/score/getClassroom.do",
+					dataType: "json",
+					data: {},
+					success: function(data) {
+						arrayGrade = data;
+						getGrade(data);
+
+					},
+					error: function() {
+						alert("获取班级信息失败!");
+					}
+				});
+			})
+		</script>
+
+		<!--查询按钮的点击事件 -->
+		<script>
+			$("#query").click(function() {
+				var st_name = $("#st_name option:selected").text();
+				if(st_name == "") {
+					alert("请选择姓名!");
+					return;
+				}
+
+				getGpa(st_name);
+				getCredit();
+				getDistribution(st_name);
+				getAward();
+				getRadar(st_name);
+				getVolunteer();
+				getDuty();
+
+			})
+		</script>
+
+		<!--个人成绩变化趋势图-->
+		<script type="text/javascript">
+			function getGpa(st_name) {
+				// 基于准备好的dom，初始化echarts图表
+				var myChart = echarts.init(document.getElementById('main'));
+
+				var option = {
+					title: {
+						text: '成绩变化情况',
+						textStyle: {
+							color: 'black',
+							fontFamily: 'Microsoft YaHei'
+						},
+						subtextStyle: {
+							color: 'black',
+							fontFamily: 'Microsoft YaHei'
+						},
+					},
+					tooltip: {
+						trigger: 'axis'
+					},
+					legend: {
+						data: [st_name]
+					},
+					toolbox: {
+						show: true,
+						feature: {
+							mark: {
+								show: true
+							},
+							dataView: {
+								show: true,
+								readOnly: false
+							},
+							magicType: {
+								show: true,
+								type: ['line', 'bar']
+							},
+							restore: {
+								show: true
+							},
+							saveAsImage: {
+								show: true
+							}
+						}
+					},
+					calculable: true,
+					xAxis: [{
+						type: 'category',
+						boundaryGap: false,
+						//data : ['大一上','大一下','大二上','大二下','大三上','大三下','大四上','大四下']
+					}],
+					yAxis: [{
+						type: 'value',
+						axisLabel: {
+							formatter: '{value}'
+						}
+					}],
+					series: [{
+						name: st_name,
+						type: 'line',
+						//data:[3.2, 3.2, 3.8, 4.0, 3.7, 3.3, 3.7,3.2],
+						barWidth: 80,
+						itemStyle: {
+							normal: {
+								label: {
+									show: true,
+									position: 'top',
+									textStyle: {
+										color: 'black',
+										fontSize: 16
+									}
+
+								}
+							}
+						}
+
+					}]
+				};
+
+				//ajax请求数据
+
+				$.ajax({
+					type: "post",
+					url: "/score/gpa.do",
+					dataType: "json",
+					data: {
+						"id": $("#st_name option:selected").val()
+					},
+
+					success: function(data) {
+						var xaxis = [];
+						var gpa = [];
+						for(var i = 0; i < data.length; i++) {
+							xaxis.push(data[i].year);
+							gpa.push(data[i].value);
+
+						}
+
+						// 为echarts对象加载数据 
+						option.xAxis[0].data = xaxis;
+						option.series[0].data = gpa;
+						myChart.setOption(option, true);
+					},
+					error: function(err) {
+						alert("发生错误");
+					}
+
+				});
+
+				//图表大小自适应
+				window.addEventListener("resize", function() {
+					myChart.resize();
+				});
+
+			}
+		</script>
+
+		<!--个人学分积欠变化趋势表-->
+		<script type="text/javascript">
+			function getCredit() {
+				// 基于准备好的dom，初始化echarts图表
+				var myChart2 = echarts.init(document.getElementById('ch_lack_credit'));
+
+				var option2 = {
+					title: {
+						text: '学分积欠情况',
+						textStyle: {
+							color: 'black',
+							fontFamily: 'Microsoft YaHei'
+						},
+						subtextStyle: {
+							color: 'black',
+							fontFamily: 'Microsoft YaHei',
+							fontSize: 14
+						},
+						itemGap: 12
+
+					},
+					tooltip: {
+						trigger: 'axis'
+					},
+					legend: {
+						data: ['已获', '未获'],
+					},
+					toolbox: {
+						show: true,
+						feature: {
+							mark: {
+								show: true
+							},
+							dataView: {
+								show: true,
+								readOnly: false
+							},
+							magicType: {
+								show: true,
+								type: ['line', 'bar', 'stack', 'tiled']
+							},
+							restore: {
+								show: true
+							},
+							saveAsImage: {
+								show: true
+							}
+						}
+					},
+					calculable: true,
+					xAxis: [{
+						type: 'category',
+						//data: ['2015-2016', '2016-2017', '2017-2018', '2018-2019']
+					}],
+					yAxis: [{
+						type: 'value'
+					}],
+					series: [{
+							name: '已获',
+							type: 'bar',
+							barWidth: 80,
+							barGap: 30,
+							itemStyle: {
+								normal: {
+									label: {
+										show: true,
+										position: 'top',
+										textStyle: {
+											color: 'black',
+											fontSize: 16
+										}
+									}
+
+								}
+							}
+							//data: [22, 18, 10, 32],
+
+						},
+						{
+							name: '未获',
+							type: 'bar',
+							barWidth: 80,
+							barGap: 30,
+							itemStyle: {
+								normal: {
+									label: {
+										show: true,
+										position: 'top',
+										textStyle: {
+											color: 'black',
+											fontSize: 16
+										}
+									}
+
+								}
+							}
+							//data: [10, 5, 12, 2],
+
+						}
+					]
+				};
+
+				//ajax请求数据
+				$.ajax({
+					type: "post",
+					url: "/score/credit.do",
+					dataType: "json",
+					data: {
+						"id": $("#st_name option:selected").val()
+					},
+
+					success: function(res) {
+						var xaxis = [];
+						var y1 = [];
+						var y2 = [];
+						for(var i = 0; i < res.yearCredits.length; i++) {
+							xaxis.push(res.yearCredits[i].year);
+							y1.push(res.yearCredits[i].credit_gain);
+							y2.push(res.yearCredits[i].credit_ungain);
+
+						}
+
+						// 为echarts对象加载数据 
+						option2.xAxis[0].data = xaxis;
+						option2.series[0].data = y1;
+						option2.series[1].data = y2;
+						option2.title.subtext = '学分获得率:' + res.rate + "%";
+						myChart2.setOption(option2, true);
+					},
+					error: function(err) {
+						myChart2.clear();
+						alert("发生错误");
+					}
+
+				});
+
+				//图表大小自适应
+				window.addEventListener("resize", function() {
+					myChart2.resize();
+				});
+
+			}
+		</script>
+
+		<!--成绩分布图-->
+		<script>
+			function getDistribution(st_name) {
+				var myChart = echarts.init(document.getElementById('st_grade_distribute'));
+
+				var option1 = {
+					title: {
+						text: '必修课成绩分布状况',
+						x: 'center'
+					},
+					tooltip: {
+						trigger: 'item',
+						formatter: "{a} <br/>{b} : {c} ({d}%)"
+					},
+					legend: {
+						orient: 'vertical',
+						x: 'left',
+						data: ["优秀", "良好", "中等", "及格", "不及格"],
+						textStyle: { //图例文字的样式
+							fontSize: 14
+						}
+					},
+					color: ['#65d186', '#f67287', '#f29e3c', '#c05bdd', '#7a65f2'],
+					toolbox: {
+						show: true,
+						feature: {
+							mark: {
+								show: true
+							},
+							dataView: {
+								show: true,
+								readOnly: false
+							},
+							magicType: {
+								show: true,
+								type: ['pie', 'funnel'],
+								option: {
+									funnel: {
+										x: '25%',
+										width: '50%',
+										funnelAlign: 'left',
+										max: 50
+									}
+								}
+							},
+							restore: {
+								show: true
+							},
+							saveAsImage: {
+								show: true
+							}
+						}
+					},
+					calculable: true,
+					series: [{
+						name: '成绩分布',
+						type: 'pie',
+						radius: '55%',
+						center: ['50%', '60%'],
+						itemStyle: {
+							normal: {
+								label: {
+									show: true,
+									textStyle: {
+										fontSize: 15
+									},
+									formatter: '{b}:{c}: ({d}%)'
+								}
+							}
+						},
+						data: [{
+								name: "优秀",
+								value: 0
+							}, {
+								name: "良好",
+								value: 0
+							},
+							{
+								name: "中等",
+								value: 0
+							},
+							{
+								name: "及格",
+								value: 0
+							},
+							{
+								name: "不及格",
+								value: 0
+							},
+						]
+					}]
+				};
+
+				$.ajax({
+					type: "post",
+					url: "/score/getScoreDistribution",
+					dataType: "json",
+					data: {
+						"id": $("#st_name option:selected").val()
+					},
+
+					success: function(data1) {
+						for(var i = 0; i < 5; i++) {
+							option1.series[0].data[i].value = data1[option1.series[0].data[i].name];
+						}
+						myChart.setOption(option1);
+					},
+					error: function(err) {
+						alert("获取成绩分布图失败...");
+					}
+				});
+
+				//图表大小自适应
+				window.addEventListener("resize", function() {
+					myChart.resize();
+				});
+			}
+		</script>
+
+		<!--获取奖项数据 -->
+		<script type="text/javascript">
+			function getAward() {
+
+				//ajax请求数据
+				//清空之前的行
+				$("#st_award tbody").html("");
+
+				$.ajax({
+					type: "post",
+					url: "/data/cloud.do",
+					dataType: "json",
+					data: {
+						"id": $("#st_name option:selected").val()
+					},
+
+					success: function(data) {
+						var table = document.getElementById("st_award");
+						var t_body = document.getElementById("st_award_tbody");
+						for(var i = 0; i < data.length; i++) {
+							var t_tr = document.createElement("tr");
+							var td_year = document.createElement("td");
+							var td_award = document.createElement("td");
+
+							td_year.innerHTML = "<font size='3' color='#000000'>" + data[i].year + "</font>";
+							td_award.innerHTML = "<font size='3' color='#000000'>" + data[i].name + "</font>";
+
+							t_tr.appendChild(td_year);
+							t_tr.appendChild(td_award);
+							t_body.appendChild(t_tr);
+						}
+						table.appendChild(t_body);
+
+						document.getElementById("st_award_title").style.visibility = "visible";
+
+					},
+					error: function(err) {
+						alert("发生错误");
+					}
+
+				});
+			}
+		</script>
+
+		<!--雷达图-->
+		<script type="text/javascript">
+			function getRadar(st_name) {
+				// 基于准备好的dom，初始化echarts图表
+				var st_radar_chart = echarts.init(document.getElementById('st_radar'));
+
+				var radar_option = {
+					title: {
+						text: '综合素质',
+						subtext: ''
+					},
+					tooltip: {
+						trigger: 'axis'
+					},
+					legend: {
+						orient: 'vertical',
+						x: 'right',
+						y: 'bottom',
+						data: [st_name]
+					},
+					toolbox: {
+						show: true,
+						feature: {
+							mark: {
+								show: true
+							},
+							dataView: {
+								show: true,
+								readOnly: false
+							},
+							restore: {
+								show: true
+							},
+							saveAsImage: {
+								show: true
+							}
+						}
+					},
+					polar: [{
+						//										indicator: [{
+						//												text: '文化素质',
+						//												max: 100
+						//											},
+						//											{
+						//												text: '身体素质',
+						//												max: 100
+						//											},
+						//											{
+						//												text: '科研情况',
+						//												max: 100
+						//											},
+						//											{
+						//												text: '志愿服务',
+						//												max: 100
+						//											},
+						//											{
+						//												text: '道德素质',
+						//												max: 100
+						//											},
+						//											{
+						//												text: '心理素质',
+						//												max: 100
+						//											},
+						//											{
+						//												text: '职业素质',
+						//												max: 100
+						//											}
+						//										]
+					}],
+					calculable: true,
+					series: [{
+						name: '雷达图',
+						type: 'radar',
+						itemStyle: {
+							normal: {
+								label: {
+									show: true,
+									position: 'top',
+									textStyle: {
+										color: 'black',
+										fontSize: 16
+									}
+								}
+							}
+						},
+						data: [{
+							//value: [67, 46, 72, 46, 49, 37, 67],
+							//name: '同学A'
+						}]
+					}]
+				};
+
+				//ajax请求数据
+
+				$.ajax({
+					type: "post",
+					url: "/radar/person.do",
+					dataType: "json",
+					data: {
+						"id": $("#st_name option:selected").val()
+					},
+					success: function(data) {
+						var latitude = [];
+						var radar_value = [];
+						for(var i = 0; i < data.length; i++) {
+							var temp = {
+								text: data[i].radarName,
+								max: 100
+							};
+							latitude.push(temp);
+							radar_value.push(data[i].radarScore);
+						}
+						radar_option.polar[0].indicator = latitude;
+						radar_option.series[0].data[0].value = radar_value;
+						radar_option.series[0].data[0].name = st_name;
+
+						// 为echarts对象加载数据 
+						st_radar_chart.setOption(radar_option);
+
+						//获取建议
+						getAdvice(data[0].radarScore, data[1].radarScore, data[2].radarScore, data[3].radarScore);
+
+					},
+					error: function(err) {
+						alert("发生错误！");
+					}
+
+				});
+
+				//图表大小自适应
+				window.addEventListener("resize", function() {
+					st_radar_chart.resize();
+				});
+			}
+		</script>
+
+		<!--获取志愿时长与班级、年级、学院排名-->
+		<script type="text/javascript">
+			function getVolunteer() {
+				//清空之前的行
+				$("#st_vol tbody").html("");
+
+				//将各项数据置为0
+				$("#data_class").attr("data-percent", 0);
+				$("#data_grade").attr("data-percent", 0);
+				$("#data_academy").attr("data-percent", 0);
+				$.ajax({
+					type: "post",
+					url: "/volunteer/getVolunteerRank",
+					dataType: "json",
+					data: {
+						"id": $("#st_name option:selected").val()
+					},
+
+					success: function(data) {
+						//设置总志愿时长数据
+						var table = document.getElementById("st_vol");
+						var tbody = document.getElementById("st_vol_tbody");
+						var tr = document.createElement("tr");
+						var td = document.createElement("td");
+						td.innerHTML = "<font size='3' color='#000000'>" + data.all_time + " 个小时" + "</font>";
+						tr.appendChild(td);
+						tbody.appendChild(tr);
+						table.appendChild(tbody);
+						document.getElementById("st_vol_title").style.visibility = "visible";
+
+						//显示志愿时长排名标题
+						document.getElementById("st_vol_rank_title").style.visibility = "visible";
+
+						//设置排名数据
+						$("#data_class").attr("data-percent", data.class_rank);
+						$("#data_grade").attr("data-percent", data.grade_rank);
+						$("#data_academy").attr("data-percent", data.academy_rank);
+						$("#sp_class").text("班级前" + data.class_rank + "%");
+						$("#sp_grade").text("年级前" + data.grade_rank + "%");
+						$("#sp_academy").text("学院前" + data.academy_rank + "%");
+
+						$('.easy-pie-chart.percentage').each(function() {
+							$(this).easyPieChart({
+								barColor: $(this).data('color'),
+								trackColor: '#EEEEEE',
+								scaleColor: false,
+								lineCap: 'butt',
+								lineWidth: 8,
+								animate: ace.vars['old_ie'] ? false : 1000,
+								size: 98
+							}).css('color', $(this).data('color'));
+						});
+
+					},
+					error: function(err) {
+						alert("获取志愿数据出错...");
+					}
+
+				});
+			}
+		</script>
+
+		<!--获取职务数据 -->
+		<script type="text/javascript">
+			function getDuty() {
+
+				//ajax请求数据
+				//清空之前的行
+				$("#st_duty tbody").html("");
+
+				$.ajax({
+					type: "post",
+					url: "/duty/getDuty",
+					dataType: "json",
+					data: {
+						"id": $("#st_name option:selected").val()
+					},
+
+					success: function(data) {
+						var table = document.getElementById("st_duty");
+						var t_body = document.getElementById("st_duty_tbody");
+						if(data.length == 0) {
+							var t_tr = document.createElement("tr");
+							var t_td = document.createElement("td");
+							t_td.innerHTML = "<font size='3' color='#000000'>" + "近期未担任任何职务..." + "</font>";
+							t_tr.appendChild(t_td);
+							t_body.appendChild(t_tr);
+						}
+						for(var i = 0; i < data.length; i++) {
+							var t_tr = document.createElement("tr");
+							var td_year = document.createElement("td");
+							var td_duty = document.createElement("td");
+
+							td_year.innerHTML = "<font size='3' color='#000000'>" + data[i].du_time + "</font>";
+							td_duty.innerHTML = "<font size='3' color='#000000'>" + data[i].du_name + "</font>";
+
+							t_tr.appendChild(td_year);
+							t_tr.appendChild(td_duty);
+							t_body.appendChild(t_tr);
+						}
+						table.appendChild(t_body);
+
+						document.getElementById("st_duty_title").style.visibility = "visible";
+
+					},
+					error: function(err) {
+						alert("发生错误");
+					}
+
+				});
+			}
+		</script>
+
+		<!-- 获取个人建议-->
+		<script type="text/javascript">
+			function getAdvice(study, sport, sciense, volunteer) {
+				$.ajax({
+					type: "post",
+					url: "/radar/advice.do",
+					dataType: "json",
+					data: {
+						"study": parseInt(study),
+						"sport": parseInt(sport),
+						"sciense": parseInt(sciense),
+						"volunteer": parseInt(volunteer)
+					},
+					success: function(data) {
+						$("#p_study").text(data[0].ad_suggestion);
+						$("#p_sport").text(data[1].ad_suggestion);
+						$("#p_sciense").text(data[2].ad_suggestion);
+						$("#p_volunteer").text(data[3].ad_suggestion);
+					},
+					error: function(err) {
+						alert("获取个人建议失败!");
+					}
+				});
+			}
+		</script>
+
+	</body>
+
+</html>
