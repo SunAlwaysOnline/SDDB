@@ -4,3 +4,35 @@
 ## 所涉技术 
 后端：SSM(Spring+SpringMVC+MyBatis),Mysql  
 前端：JS,JQuery,Ajax
+
+## 系统截图
+
+### 首页
+<br>
+<div align="center">
+  <img src="https://github.com/SunAlwaysOnline/SDDB/blob/master/screenShot/首页.png"/>
+</div>
+
+### 个人主页
+<br>
+<div align="center">
+  <img src="https://github.com/SunAlwaysOnline/SDDB/blob/master/screenShot/个人主页.png"/>
+</div>
+
+### 新闻页面与成绩查询
+<br>
+<div align="center">
+  <img src="https://github.com/SunAlwaysOnline/SDDB/blob/master/screenShot/数据分析模块-发展分析1.png"/>
+</div>
+<div align="center">
+  <img src="https://github.com/SunAlwaysOnline/SDDB/blob/master/screenShot/数据分析模块-发展分析2.png"/>
+</div>
+<div align="center">
+  <img src="https://github.com/SunAlwaysOnline/SDDB/blob/master/screenShot/数据分析模块-发展分析3.png"/>
+</div>
+<br>
+
+### <a href="https://github.com/SunAlwaysOnline/SDDB/tree/master/screenShot">更多截图</a>
+
+
+### <a href="https://blog.csdn.net/qq_33591903">欢迎关注个人博客</a>
