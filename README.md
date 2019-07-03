@@ -10,7 +10,7 @@
 ### 首页
 <br>
 <div align="center">
-  <img height="700px" src="https://github.com/SunAlwaysOnline/SDDB/blob/master/screenShot/首页.png"/>
+  <img src="https://github.com/SunAlwaysOnline/SDDB/blob/master/screenShot/首页.png"/>
 </div>
 
 
