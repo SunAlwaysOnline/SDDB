@@ -19,7 +19,7 @@
         <maven.compiler.target>1.7</maven.compiler.target>
 
         <!--框架jar包版本配置-->
-        <springframework.version>4.1.7.RELEASE</springframework.version>
+        <springframework.version>5.2.20.RELEASE</springframework.version>
         <mybatis-spring.version>1.3.0</mybatis-spring.version>
         <mybatis.version>3.3.0</mybatis.version>
     </properties>
